@@ -28,17 +28,6 @@ class StudentsPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Padding(
-              padding: EdgeInsets.only(bottom: 20),
-              child: Text(
-                'Academic Services',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                  color: StudentsPageColors.sectionTitle, // استخدام لون العنوان
-                ),
-              ),
-            ),
             Expanded(
               child: GridView.count(
                 crossAxisCount: 2,
