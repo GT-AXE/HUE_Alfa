@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hue/core/utils/assets.dart';
-import 'package:hue/features/auth/login.dart';
-import 'package:hue/features/home/home.dart';
+import 'package:hue/Pages/auth/login.dart';
+import 'package:hue/Pages/home/home.dart';
 import 'package:hue/core/utils/app_colors.dart'; // استيراد الألوان
 import 'dart:math' as math;
 

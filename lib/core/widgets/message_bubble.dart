@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hue/features/chat/message_model.dart';
+import 'package:hue/Pages/chat/message_model.dart';
 import '../utils/app_colors.dart';
 
 class MessageBubble extends StatelessWidget {

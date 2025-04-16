@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:hue/core/utils/assets.dart';
 import 'package:hue/core/models/role.dart';
 import 'package:hue/core/utils/role_manager.dart';
-import 'package:hue/staff/staff.dart';
+import 'package:hue/Pages/staff/staff.dart';
 import '../auth/login.dart';
 import '../college/Colleges.dart';
 import '../education/doctors.dart';

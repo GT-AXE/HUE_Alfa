@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart'; // Import GetX package
-import 'package:hue/features/home/welcome.dart'; // Ensure the path is correct
+import 'package:hue/Pages/home/welcome.dart'; // Ensure the path is correct
 
 void main() {
   runApp(const HueApp());
