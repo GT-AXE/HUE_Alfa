@@ -178,3 +178,12 @@ class SubmissionsColors {
   static const buttonColor = Colors.deepPurple; // اللون الخاص بزر الإرسال
   static const cardBackgroundColor = Color(0xFFEDEDED); // لون خلفية البطاقة
 }
+
+/// ألوان مخصصة لصفحة "staff"
+class staffColors {
+  static const Color primary = Colors.lightBlue;
+  static const Color bubbleSelf = Colors.amber;
+  static const Color bubbleOther = Color(0xFFF0F0F0);
+  static const Color textSelf = Colors.white;
+  static const Color textOther = Colors.black;
+}

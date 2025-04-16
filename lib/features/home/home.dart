@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart'; // استبدال setState بـ GetX
+import 'package:get/get.dart';
 import 'package:hue/core/utils/assets.dart';
-import 'package:hue/staff/roles.dart';
+import 'package:hue/core/models/role.dart';
+import 'package:hue/core/utils/role_manager.dart';
 import 'package:hue/staff/staff.dart';
 import '../auth/login.dart';
 import '../college/Colleges.dart';
@@ -24,7 +25,7 @@ class HomeController extends GetxController {
     SettingsPage(),
     SubmissionsPage(),
     ChatPage(),
-    StaffPage(userRole: Role.admin), // ← أضفنا صفحة الموظفين
+    StaffPage(userRole: Role.hr), 
   ];
 
   void changePage(int index) {

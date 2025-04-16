@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../staff/roles.dart'; // استيراد ملف الأدوار
+import 'package:hue/core/models/role.dart';
+import 'package:hue/core/utils/role_manager.dart';
+import 'package:hue/core/utils/app_colors.dart';
 
-class AppColors {
-  static const Color primary = Colors.lightBlue;
-  static const Color bubbleSelf = Colors.amber;
-  static const Color bubbleOther = Color(0xFFF0F0F0);
-  static const Color textSelf = Colors.white;
-  static const Color textOther = Colors.black;
-}
 
 class StaffPage extends StatelessWidget {
-  final Role userRole; // دور المستخدم الحالي
+  final Role userRole; 
 
   StaffPage({required this.userRole});
 
@@ -20,9 +15,9 @@ class StaffPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Staff Page"),
-        backgroundColor: AppColors.primary, // استخدام اللون الأساسي في الـ AppBar
+        backgroundColor: staffColors.primary,
       ),
-      body: ListView( // تغيير Column إلى ListView لدعم التمرير عند وجود العديد من الأقسام
+      body: ListView(
         children: [
           _buildSection("Administration", RoleManager.adminRoles, context),
           _buildSection("Faculty Members", RoleManager.facultyRoles, context),
@@ -40,22 +35,22 @@ class StaffPage extends StatelessWidget {
       child: Card(
         margin: EdgeInsets.all(10),
         elevation: 4,
-        color: AppColors.bubbleOther, // استخدام اللون للـ Card
+        color: staffColors.bubbleOther,
         child: ListTile(
           title: Text(
             title,
             style: TextStyle(
               fontSize: 18, 
               fontWeight: FontWeight.bold, 
-              color: AppColors.textOther, // تغيير لون النص
+              color: staffColors.textOther, 
             ),
           ),
           subtitle: Text(
             "Access granted to: ${allowedRoles.join(", ")}",
-            style: TextStyle(color: AppColors.textOther), // تغيير لون النص في الـ subtitle
+            style: TextStyle(color: staffColors.textOther), 
           ),
           trailing: IconButton(
-            icon: Icon(Icons.edit, color: AppColors.primary), // استخدام اللون الأساسي للأيقونة
+            icon: Icon(Icons.edit, color: staffColors.primary), 
             onPressed: () {
               _editSection(context, title);
             },
@@ -71,25 +66,25 @@ class StaffPage extends StatelessWidget {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text("Edit $title", style: TextStyle(color: AppColors.primary)), // تغيير لون العنوان
+          title: Text("Edit $title", style: TextStyle(color: staffColors.primary)), // تغيير لون العنوان
           content: TextField(
             controller: controller,
             decoration: InputDecoration(
               hintText: "Enter new content",
-              hintStyle: TextStyle(color: AppColors.textOther), // تغيير لون النص في الـ hint
+              hintStyle: TextStyle(color: staffColors.textOther), // تغيير لون النص في الـ hint
             ),
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: Text("Cancel", style: TextStyle(color: AppColors.primary)), // استخدام اللون الأساسي في زر Cancel
+              child: Text("Cancel", style: TextStyle(color: staffColors.primary)), // استخدام اللون الأساسي في زر Cancel
             ),
             TextButton(
               onPressed: () {
                 print("Content saved: ${controller.text}"); // استبدل هذه الوظيفة بالحفظ الفعلي
                 Navigator.pop(context);
               },
-              child: Text("Save", style: TextStyle(color: AppColors.primary)), // استخدام اللون الأساسي في زر Save
+              child: Text("Save", style: TextStyle(color: staffColors.primary)), // استخدام اللون الأساسي في زر Save
             ),
           ],
         );
