@@ -174,8 +174,8 @@ class SubmissionsColors {
   // ألوان خاصة
   static const errorColor = Colors.red;
   static const warningColor = Color(0xFFC28D00); // اللون البرتقالي الغامق
-  static const appBarColor = Colors.deepPurple; // لون شريط العنوان
-  static const buttonColor = Colors.deepPurple; // اللون الخاص بزر الإرسال
+  static const appBarColor =  Colors.blue; // لون شريط العنوان
+  static const buttonColor = Colors.lightBlue; // اللون الخاص بزر الإرسال
   static const cardBackgroundColor = Color(0xFFEDEDED); // لون خلفية البطاقة
 }
 

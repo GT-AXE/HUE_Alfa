@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
 
   ThemeData _buildAppTheme() {
     return ThemeData(
-      primarySwatch: Colors.deepPurple,
+      primarySwatch: Colors.yellow,
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: Colors.deepPurple[50],
@@ -191,14 +191,14 @@ class _ApplicationFormPageState extends State<ApplicationFormPage> {
           padding: const EdgeInsets.symmetric(vertical: 12),
           child: Row(
             children: [
-              Icon(icon, color: Colors.deepPurple),
+              Icon(icon, color: Colors.blue),
               const SizedBox(width: 8),
               Text(
                 title,
                 style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: Colors.deepPurple,
+                  color:  Colors.blue,
                 ),
               ),
             ],
@@ -223,7 +223,7 @@ class _ApplicationFormPageState extends State<ApplicationFormPage> {
         keyboardType: keyboardType,
         decoration: InputDecoration(
           labelText: label,
-          suffixIcon: const Icon(Icons.edit, size: 20, color: Colors.deepPurple),
+          suffixIcon: const Icon(Icons.edit, size: 20, color: Colors.red),
         ),
         validator: (value) => value!.isEmpty ? 'هذا الحقل مطلوب' : null,
       ),
@@ -264,7 +264,7 @@ class _ApplicationFormPageState extends State<ApplicationFormPage> {
               decoration: BoxDecoration(
                 color: Colors.grey[200],
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: Colors.deepPurple),
+                border: Border.all(color:  Colors.blue),
               ),
               child: _buildImagePreview(isStudent),
             ),
@@ -304,12 +304,12 @@ class _ApplicationFormPageState extends State<ApplicationFormPage> {
           mainAxisSize: MainAxisSize.min,
           children: [
             ListTile(
-              leading: const Icon(Icons.camera_alt, color: Colors.deepPurple),
+              leading: const Icon(Icons.camera_alt, color: Colors.blue),
               title: const Text('الكاميرا'),
               onTap: () => Navigator.pop(context, ImageSource.camera),
             ),
             ListTile(
-              leading: const Icon(Icons.photo_library, color: Colors.deepPurple),
+              leading: const Icon(Icons.photo_library, color: Colors.yellow),
               title: const Text('معرض الصور'),
               onTap: () => Navigator.pop(context, ImageSource.gallery),
             ),
@@ -338,7 +338,7 @@ class _ApplicationFormPageState extends State<ApplicationFormPage> {
       child: ElevatedButton(
         onPressed: _submitForm,
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.deepPurple,
+          backgroundColor: Colors.blue,
           padding: const EdgeInsets.symmetric(vertical: 16),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12)),
