@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:hue/core/utils/app_colors.dart';
 import 'college_detailsbasis_basis.dart';

@@ -5,7 +5,7 @@ import 'package:hue/core/models/role.dart';
 import 'package:hue/core/controllers/role_manager.dart';
 import 'package:hue/Pages/staff/staff.dart';
 import '../auth/login.dart';
-import '../universities/universities_/universities_page.dart';
+import '../college/universities/universities_page.dart';
 import '../education/doctors.dart';
 import '../education/students.dart';
 import '../settings/settings.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hue/Pages/home/home.dart';
-import 'package:hue/Pages/universities/universities_/universities_page.dart';
+import 'package:hue/Pages/college/universities/universities_page.dart';
 import 'package:hue/Pages/education/doctors.dart';
 import 'package:hue/Pages/education/students.dart';
 import 'package:hue/Pages/settings/settings.dart';
