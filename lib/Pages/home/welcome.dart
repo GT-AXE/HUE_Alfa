@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use, unused_local_variable, unused_element
+
 import 'package:flutter/material.dart';
 import 'package:hue/core/utils/assets.dart';
 import 'package:hue/Pages/auth/login.dart';
