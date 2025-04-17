@@ -35,7 +35,7 @@ class _ResetPasswordState extends State<ResetPassword> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Reset Password"),
-        backgroundColor: resetColors.appBarColor, // استخدام اللون المخصص لشريط العنوان
+        backgroundColor: resetColors.appBarColor,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -60,7 +60,7 @@ class _ResetPasswordState extends State<ResetPassword> {
             ElevatedButton(
               onPressed: _sendResetLink,
               style: ElevatedButton.styleFrom(
-                backgroundColor: resetColors.warningColor, // استخدام اللون البرتقالي الغامق
+                backgroundColor: resetColors.warningColor,
                 padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
               ),
               child: const Text('Send Reset Link'),

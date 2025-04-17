@@ -10,25 +10,23 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  File? _image;  // لتخزين الصورة التي يختارها المستخدم
-  final picker = ImagePicker();  // لاختيار الصور من الكاميرا أو المعرض
-  final String _defaultAsset = 'assets/images/default_profile.png';  // الصورة الافتراضية في حالة عدم وجود صورة للمستخدم
+  File? _image;
+  final picker = ImagePicker(); 
+  final String _defaultAsset = 'assets/images/default_profile.png';  
 
-  // دالة لاختيار الصورة من الكاميرا أو المعرض
   Future<void> _getImage(ImageSource source) async {
     try {
-      final pickedFile = await picker.pickImage(source: source);  // اختيار الصورة من المصدر المحدد
+      final pickedFile = await picker.pickImage(source: source); 
       if (pickedFile != null) {
         setState(() {
-          _image = File(pickedFile.path);  // تخزين الصورة التي تم اختيارها
+          _image = File(pickedFile.path);
         });
       }
     } catch (e) {
-      _showErrorSnackbar('Failed to get image: ${e.toString()}');  // في حال حدوث خطأ
+      _showErrorSnackbar('Failed to get image: ${e.toString()}'); 
     }
   }
 
-  // دالة لعرض رسالة خطأ عند فشل اختيار الصورة
   void _showErrorSnackbar(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -38,7 +36,6 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  // دالة لعرض حوار لتأكيد تسجيل الخروج
   void _showLogoutDialog() {
     showDialog(
       context: context,
@@ -47,13 +44,12 @@ class _ProfilePageState extends State<ProfilePage> {
         content: Text('Are you sure you want to logout?'),
         actions: [
           TextButton(
-            onPressed: () => Navigator.pop(context),  // إغلاق الحوار
+            onPressed: () => Navigator.pop(context), 
             child: Text('Cancel'),
           ),
           TextButton(
             onPressed: () {
-              // تنفيذ منطق تسجيل الخروج هنا
-              Navigator.pop(context);  // إغلاق الحوار بعد الخروج
+              Navigator.pop(context); 
             },
             child: Text('Logout', style: TextStyle(color: Colors.red)),
           ),
@@ -76,7 +72,6 @@ class _ProfilePageState extends State<ProfilePage> {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              // صورة الملف الشخصي مع زر تعديل الصورة
               Stack(
                 alignment: Alignment.bottomRight,
                 children: [
@@ -84,8 +79,8 @@ class _ProfilePageState extends State<ProfilePage> {
                     radius: 60,
                     backgroundColor: Colors.grey[300],
                     backgroundImage: _image != null
-                        ? FileImage(_image!)  // إذا كانت الصورة موجودة
-                        : AssetImage(_defaultAsset) as ImageProvider,  // الصورة الافتراضية
+                        ? FileImage(_image!) 
+                        : AssetImage(_defaultAsset) as ImageProvider, 
                   ),
                   Container(
                     decoration: BoxDecoration(
@@ -94,17 +89,17 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     child: IconButton(
                       icon: Icon(Icons.camera_alt, color: Colors.white),
-                      onPressed: () => _showImageSourceDialog(),  // فتح حوار اختيار المصدر
+                      onPressed: () => _showImageSourceDialog(),  
                     ),
                   ),
                 ],
               ),
               SizedBox(height: 20),
-              _buildProfileInfo(),  // عرض معلومات الملف الشخصي
+              _buildProfileInfo(),
               SizedBox(height: 30),
-              _buildActionButtons(),  // أزرار الإجراءات
+              _buildActionButtons(), 
               SizedBox(height: 15),
-              _buildSupportButton(),  // زر الدعم
+              _buildSupportButton(),  
             ],
           ),
         ),
@@ -112,7 +107,6 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  // دالة لعرض معلومات الملف الشخصي
   Widget _buildProfileInfo() {
     return Column(
       children: [
@@ -132,7 +126,6 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  // دالة لعرض معلومات الملف الشخصي بشكل منظم
   Widget _buildInfoItem(String text) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4.0),
@@ -146,7 +139,6 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  // دالة لعرض الأزرار الخاصة بالإجراءات مثل تغيير كلمة المرور وتسجيل الخروج
   Widget _buildActionButtons() {
     return Column(
       children: [
@@ -168,7 +160,6 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  // دالة لعرض الـ ListTile (عنصر القائمة) مع أيقونة ونص
   Widget _buildListTile({
     required IconData icon,
     required String title,
@@ -184,7 +175,6 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  // دالة لعرض زر "اتصل بالدعم"
   Widget _buildSupportButton() {
     return ElevatedButton.icon(
       onPressed: () => _contactSupport(),
@@ -201,7 +191,6 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  // دالة لفتح حوار لاختيار مصدر الصورة (الكاميرا أو المعرض)
   void _showImageSourceDialog() {
     showDialog(
       context: context,
@@ -214,16 +203,16 @@ class _ProfilePageState extends State<ProfilePage> {
               leading: Icon(Icons.camera_alt),
               title: Text('Camera'),
               onTap: () {
-                Navigator.pop(context);  // إغلاق الحوار
-                _getImage(ImageSource.camera);  // اختيار الصورة من الكاميرا
+                Navigator.pop(context);  
+                _getImage(ImageSource.camera); 
               },
             ),
             ListTile(
               leading: Icon(Icons.photo_library),
               title: Text('Gallery'),
               onTap: () {
-                Navigator.pop(context);  // إغلاق الحوار
-                _getImage(ImageSource.gallery);  // اختيار الصورة من المعرض
+                Navigator.pop(context); 
+                _getImage(ImageSource.gallery);  
               },
             ),
           ],
@@ -232,13 +221,22 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  // دالة للتنقل إلى صفحة تغيير كلمة المرور
   void _navigateToChangePassword() {
-    // تنفيذ التنقل إلى صفحة تغيير كلمة المرور هنا
   }
 
-  // دالة للتواصل مع الدعم الفني
   void _contactSupport() {
-    // تنفيذ وظيفة الاتصال بالدعم الفني هنا
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Contact Support'),
+        content: Text('Support contact details go here.'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context), 
+            child: Text('Close'),
+          ),
+        ],
+      ),
+    );
   }
 }

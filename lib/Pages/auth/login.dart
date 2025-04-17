@@ -94,7 +94,7 @@ class _LoginState extends State<Login> {
       appBar: AppBar(
         title: const Text("LOGIN"),
         centerTitle: true,
-        backgroundColor: LoginColors.primaryColor, // استخدام اللون الرئيسي
+        backgroundColor: LoginColors.primaryColor, 
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.pushAndRemoveUntil(
@@ -116,7 +116,7 @@ class _LoginState extends State<Login> {
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
-                  color: LoginColors.secondaryColor, // استخدام اللون الأزرق
+                  color: LoginColors.secondaryColor,
                 ),
               ),
               const SizedBox(height: 10),
@@ -124,7 +124,7 @@ class _LoginState extends State<Login> {
                 "سجل الدخول لاستخدام حسابك",
                 style: TextStyle(
                   fontSize: 16,
-                  color: LoginColors.greyColor, // استخدام اللون الرمادي
+                  color: LoginColors.greyColor,
                 ),
               ),
               const SizedBox(height: 30),
@@ -169,7 +169,7 @@ class _LoginState extends State<Login> {
                 child: ElevatedButton(
                   onPressed: _isLoading ? null : _login,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: LoginColors.primaryColor, // استخدام اللون الرئيسي
+                    backgroundColor: LoginColors.primaryColor, 
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -188,7 +188,7 @@ class _LoginState extends State<Login> {
                           'LOGIN',
                           style: TextStyle(
                             fontSize: 18,
-                            color: LoginColors.buttonTextColor, // استخدام اللون الأبيض
+                            color: LoginColors.buttonTextColor, 
                           ),
                         ),
                 ),
@@ -203,7 +203,7 @@ class _LoginState extends State<Login> {
                 child: const Text(
                   'RESET PASSWORD?',
                   style: TextStyle(
-                    color: LoginColors.warningColor, // استخدام اللون البرتقالي الغامق
+                    color: LoginColors.warningColor, 
                     fontSize: 16,
                   ),
                 ),
@@ -220,7 +220,7 @@ class _LoginState extends State<Login> {
                     text: 'Don\'t have an account? ',
                   ),
                   style: TextStyle(
-                    color: LoginColors.warningColor, // استخدام اللون البرتقالي الغامق
+                    color: LoginColors.warningColor,
                     fontSize: 16,
                   ),
                 ),

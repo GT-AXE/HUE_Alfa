@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class DoctorsPage extends StatelessWidget {
-  // قائمة الأطباء مع تفاصيلهم
+
   final List<Map<String, dynamic>> doctors = [
     {
       "name": "Dr. Ahmed",
@@ -34,7 +34,7 @@ class DoctorsPage extends StatelessWidget {
     );
   }
 
-  // بناء شريط التطبيق العلوي
+
   AppBar _buildAppBar() {
     return AppBar(
       title: const Text('Medical Staff', style: TextStyle(color: Colors.white)),
@@ -54,7 +54,7 @@ class DoctorsPage extends StatelessWidget {
     );
   }
 
-  // بناء محتوى الصفحة
+
   Widget _buildBody(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
@@ -76,7 +76,7 @@ class DoctorsPage extends StatelessWidget {
   }
 }
 
-// الكارت الخاص بكل طبيب
+
 class DoctorCard extends StatelessWidget {
   final Map<String, dynamic> doctor;
   
@@ -121,7 +121,7 @@ class DoctorCard extends StatelessWidget {
     );
   }
 
-  // بناء صورة البروفايل للطبيب
+
   Widget _buildProfileImage(double screenWidth) {
     return Container(
       width: screenWidth * 0.22,
@@ -136,7 +136,7 @@ class DoctorCard extends StatelessWidget {
     );
   }
 
-  // بناء معلومات الطبيب (الاسم، التخصص، التقييم...)
+
   Widget _buildDoctorInfo() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -154,7 +154,7 @@ class DoctorCard extends StatelessWidget {
     );
   }
 
-  // بناء صف التقييم (النجوم)
+
   Widget _buildRatingRow() {
     return Row(
       children: [
@@ -171,7 +171,7 @@ class DoctorCard extends StatelessWidget {
     );
   }
 
-  // بناء النجوم بناءً على التقييم
+
   Widget _buildStarRating(double rating) {
     return Row(
       children: List.generate(5, (index) {
@@ -188,7 +188,7 @@ class DoctorCard extends StatelessWidget {
     );
   }
 
-  // بناء صف الخبرة المهنية للطبيب
+
   Widget _buildExperienceRow() {
     return Row(
       children: [
@@ -207,7 +207,7 @@ class DoctorCard extends StatelessWidget {
     );
   }
 
-  // بناء زر عرض الملف الشخصي للطبيب
+
   Widget _buildProfileButton() {
     return Align(
       alignment: Alignment.centerRight,
@@ -227,7 +227,7 @@ class DoctorCard extends StatelessWidget {
     );
   }
 
-  // إظهار Snackbar عند النقر على الطبيب
+
   void _showSelectionSnackbar(BuildContext context, String name) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(

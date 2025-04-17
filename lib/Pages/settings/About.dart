@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hue/core/utils/app_colors.dart'; 
+import 'package:hue/core/utils/app_colors.dart';
+import 'package:hue/core/utils/assets.dart'; 
 
 class AboutPage extends StatelessWidget {
   const AboutPage({super.key});
@@ -8,7 +9,7 @@ class AboutPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('عن التطبيق'),
+        title: const Text('About the App'),
         backgroundColor: AppColors.primary, 
         centerTitle: true,
       ),
@@ -18,36 +19,37 @@ class AboutPage extends StatelessWidget {
           children: [
             const CircleAvatar(
               radius: 60,
-              backgroundImage: AssetImage('assets/images/logo.png'),
+              backgroundImage: AssetImage(Assets.imagesLogo),
+              backgroundColor: Color.fromARGB(255, 0, 0, 0), 
             ),
             const SizedBox(height: 20),
             _buildCard(
               Icons.info,
-              'معلومات التطبيق',
+              'App Information',
               [
-                _buildRow('الإصدار', 'BETA 0.0.1'),
-                _buildRow('التاريخ', '2024/10/10'),
-                _buildRow('الحالة', 'قيد التطوير'),
-                _buildRow('المطور', 'AXE Team'),
+                _buildRow('Version', 'ALFA 0.0.1'),
+                _buildRow('Date', '2024/10/10'),
+                _buildRow('Status', 'Under Development'),
+                _buildRow('Developer', 'AXE'),
               ],
             ),
             _buildCard(
               Icons.list,
-              'المميزات',
+              'Features',
               [
-                'إدارة الجداول الدراسية',
-                'تسليم الواجبات الإلكترونية',
-                'التواصل مع أعضاء هيئة التدريس',
-                'الوصول للموارد التعليمية',
+                'Schedule Management',
+                'Electronic Assignment Submission',
+                'Communication with Faculty Members',
+                'Access to Educational Resources',
               ].map((e) => _buildBullet(e)).toList(),
             ),
             _buildCard(
               Icons.contact_page,
-              'التواصل',
+              'Contact',
               [
-                _buildContact(Icons.email, 'support@hueapp.com'),
-                _buildContact(Icons.language, 'www.hueapp.com'),
-                _buildContact(Icons.phone, '+964 123 456 789'),
+                _buildContact(Icons.email, 'dev_axe@horus.edu.eg'),
+                _buildContact(Icons.phone, '+201012345678'),
+                _buildContact(Icons.wechat_sharp, 'Through the app'),
               ],
             ),
           ],
@@ -59,6 +61,7 @@ class AboutPage extends StatelessWidget {
   Widget _buildCard(IconData icon, String title, List<Widget> children) {
     return Card(
       margin: const EdgeInsets.only(bottom: 20),
+      
       child: Padding(
         padding: const EdgeInsets.all(15),
         child: Column(
@@ -69,7 +72,7 @@ class AboutPage extends StatelessWidget {
                 const SizedBox(width: 10),
                 Text(
                   title,
-                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
                 ),
               ],
             ),
@@ -88,7 +91,7 @@ class AboutPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(label, style: const TextStyle(fontWeight: FontWeight.w600)),
-          Text(value, style: TextStyle(color: Colors.grey[600])),
+          Text(value, style: TextStyle(color: const Color.fromARGB(255, 0, 0, 0))),
         ],
       ),
     );
@@ -114,7 +117,7 @@ class AboutPage extends StatelessWidget {
         children: [
           Icon(icon, size: 20, color: AppColors.primary),
           const SizedBox(width: 15),
-          Text(text, style: TextStyle(color: Colors.grey[600])),
+          Text(text, style: TextStyle(color: const Color.fromARGB(255, 0, 0, 0))),
         ],
       ),
     );

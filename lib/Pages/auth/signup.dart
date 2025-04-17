@@ -38,7 +38,7 @@ class _SignUpPageState extends State<SignUpPage> {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text("فشل إنشاء الحساب. تأكد من صحة البيانات."),
-              backgroundColor: SignUpColors.errorColor, // استخدام اللون الأحمر للخطأ
+              backgroundColor: SignUpColors.errorColor,
             ),
           );
         }
@@ -48,7 +48,7 @@ class _SignUpPageState extends State<SignUpPage> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text("حدث خطأ غير متوقع. الرجاء المحاولة مرة أخرى."),
-            backgroundColor: SignUpColors.errorColor, // استخدام اللون الأحمر للخطأ
+            backgroundColor: SignUpColors.errorColor,
           ),
         );
       }
@@ -61,7 +61,7 @@ class _SignUpPageState extends State<SignUpPage> {
       appBar: AppBar(
         title: const Text("Sign Up"),
         centerTitle: true,
-        backgroundColor: SignUpColors.appBarColor, // استخدام اللون المخصص لشريط العنوان
+        backgroundColor: SignUpColors.appBarColor, 
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -77,7 +77,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 style: TextStyle(
                   fontSize: 26,
                   fontWeight: FontWeight.bold,
-                  color: SignUpColors.appBarColor, // استخدام اللون المخصص
+                  color: SignUpColors.appBarColor, 
                 ),
               ),
               const SizedBox(height: 10),
@@ -86,7 +86,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 16,
-                  color: SignUpColors.greyColor, // استخدام اللون الرمادي
+                  color: SignUpColors.greyColor, 
                 ),
               ),
               const SizedBox(height: 30),
@@ -98,7 +98,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  prefixIcon: Icon(Icons.email, color: SignUpColors.appBarColor), // استخدام اللون المخصص
+                  prefixIcon: Icon(Icons.email, color: SignUpColors.appBarColor), 
                 ),
                 keyboardType: TextInputType.emailAddress,
               ),
@@ -111,7 +111,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  prefixIcon: Icon(Icons.lock, color: SignUpColors.appBarColor), // استخدام اللون المخصص
+                  prefixIcon: Icon(Icons.lock, color: SignUpColors.appBarColor),
                 ),
                 obscureText: true,
               ),
@@ -119,7 +119,7 @@ class _SignUpPageState extends State<SignUpPage> {
               ElevatedButton(
                 onPressed: _signUp,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: SignUpColors.signUpButtonColor, // استخدام اللون المخصص للزر
+                  backgroundColor: SignUpColors.signUpButtonColor,
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -129,7 +129,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   'Sign Up',
                   style: TextStyle(
                     fontSize: 18,
-                    color: SignUpColors.buttonTextColor, // استخدام اللون الأبيض للنص
+                    color: SignUpColors.buttonTextColor, 
                   ),
                 ),
               ),

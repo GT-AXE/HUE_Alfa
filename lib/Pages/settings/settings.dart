@@ -11,26 +11,24 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  String selectedLanguage = 'English';  // متغير لتخزين اللغة المحددة
+  String selectedLanguage = 'English';  
 
   @override
   void initState() {
     super.initState();
-    _loadPreferences();  // تحميل التفضيلات عند بدء الصفحة
+    _loadPreferences();  
   }
 
-  // دالة لتحميل تفضيلات المستخدم من SharedPreferences
   Future<void> _loadPreferences() async {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
-      selectedLanguage = prefs.getString('selectedLanguage') ?? 'English';  // استرجاع اللغة المحددة
+      selectedLanguage = prefs.getString('selectedLanguage') ?? 'English';  
     });
   }
 
-  // دالة لحفظ اللغة المحددة في SharedPreferences
   Future<void> _saveLanguage(String language) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('selectedLanguage', language);  // حفظ اللغة
+    await prefs.setString('selectedLanguage', language);  
   }
 
   @override
@@ -69,14 +67,12 @@ class _SettingsPageState extends State<SettingsPage> {
           child: ListView(
             physics: BouncingScrollPhysics(),
             children: [
-              // إعدادات اللغة
               _buildSettingItem(
                 icon: Icons.language,
                 title: 'Language',
                 subtitle: selectedLanguage,
                 onTap: () => _showLanguageDialog(context),
               ),
-              // إعدادات الحساب
               _buildSettingItem(
                 icon: Icons.account_circle,
                 title: 'Account Settings',
@@ -85,7 +81,6 @@ class _SettingsPageState extends State<SettingsPage> {
                   MaterialPageRoute(builder: (context) => ProfilePage()),
                 ),
               ),
-              // حول التطبيق
               _buildSettingItem(
                 icon: Icons.info_outline,
                 title: 'About Application',
@@ -94,7 +89,6 @@ class _SettingsPageState extends State<SettingsPage> {
                   MaterialPageRoute(builder: (context) => AboutPage()),
                 ),
               ),
-              // لوحة الإدارة
               _buildSettingItem(
                 icon: Icons.admin_panel_settings,
                 title: 'Admin Panel',
@@ -110,7 +104,6 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
-  // دالة لبناء عناصر الإعدادات
   Widget _buildSettingItem({
     required IconData icon,
     required String title,
@@ -127,7 +120,6 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
-  // دالة لعرض حوار اختيار اللغة
   void _showLanguageDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -141,9 +133,9 @@ class _SettingsPageState extends State<SettingsPage> {
             groupValue: selectedLanguage,
             activeColor: Colors.blueAccent,
             onChanged: (value) {
-              setState(() => selectedLanguage = value.toString());  // تغيير اللغة المحددة
-              _saveLanguage(value.toString());  // حفظ اللغة المحددة
-              Navigator.pop(context);  // إغلاق الحوار بعد التحديد
+              setState(() => selectedLanguage = value.toString());  
+              _saveLanguage(value.toString());
+              Navigator.pop(context);
             },
           )).toList(),
         ),

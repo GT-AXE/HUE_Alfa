@@ -66,25 +66,25 @@ class StaffPage extends StatelessWidget {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text("Edit $title", style: TextStyle(color: staffColors.primary)), // تغيير لون العنوان
+          title: Text("Edit $title", style: TextStyle(color: staffColors.primary)), 
           content: TextField(
             controller: controller,
             decoration: InputDecoration(
               hintText: "Enter new content",
-              hintStyle: TextStyle(color: staffColors.textOther), // تغيير لون النص في الـ hint
+              hintStyle: TextStyle(color: staffColors.textOther),
             ),
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: Text("Cancel", style: TextStyle(color: staffColors.primary)), // استخدام اللون الأساسي في زر Cancel
+              child: Text("Cancel", style: TextStyle(color: staffColors.primary)),
             ),
             TextButton(
               onPressed: () {
-                print("Content saved: ${controller.text}"); // استبدل هذه الوظيفة بالحفظ الفعلي
+                print("Content saved: ${controller.text}");
                 Navigator.pop(context);
               },
-              child: Text("Save", style: TextStyle(color: staffColors.primary)), // استخدام اللون الأساسي في زر Save
+              child: Text("Save", style: TextStyle(color: staffColors.primary)),
             ),
           ],
         );

@@ -29,7 +29,7 @@ class _SubmissionsPageState extends State<SubmissionsPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Submissions', style: TextStyle(fontWeight: FontWeight.bold)),
-        backgroundColor: SubmissionsColors.appBarColor, // استخدام اللون المخصص لشريط العنوان
+        backgroundColor: SubmissionsColors.appBarColor, 
         centerTitle: true,
       ),
       body: Padding(
@@ -40,8 +40,8 @@ class _SubmissionsPageState extends State<SubmissionsPage> {
             ElevatedButton(
               onPressed: _navigateToApplicationForm,
               style: ElevatedButton.styleFrom(
-                backgroundColor: SubmissionsColors.buttonColor, // استخدام اللون المخصص للزر
-                foregroundColor: SubmissionsColors.buttonTextColor, // استخدام اللون الأبيض للنص
+                backgroundColor: SubmissionsColors.buttonColor,
+                foregroundColor: SubmissionsColors.buttonTextColor,
                 padding: EdgeInsets.symmetric(vertical: 14),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -55,7 +55,7 @@ class _SubmissionsPageState extends State<SubmissionsPage> {
                   ? Center(
                       child: Text(
                         'No submissions yet',
-                        style: TextStyle(fontSize: 16, color: SubmissionsColors.greyColor), // استخدام اللون الرمادي
+                        style: TextStyle(fontSize: 16, color: SubmissionsColors.greyColor),
                       ),
                     )
                   : ListView.builder(
@@ -68,7 +68,7 @@ class _SubmissionsPageState extends State<SubmissionsPage> {
                             borderRadius: BorderRadius.circular(12),
                           ),
                           elevation: 4,
-                          color: SubmissionsColors.cardBackgroundColor, // استخدام اللون المخصص لخلفية البطاقة
+                          color: SubmissionsColors.cardBackgroundColor, 
                           child: ListTile(
                             contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
                             title: Text(
@@ -77,9 +77,9 @@ class _SubmissionsPageState extends State<SubmissionsPage> {
                             ),
                             subtitle: Text(
                               'Status: Under Review (3 Days)',
-                              style: TextStyle(fontSize: 14, color: SubmissionsColors.greyColor), // استخدام اللون الرمادي
+                              style: TextStyle(fontSize: 14, color: SubmissionsColors.greyColor), 
                             ),
-                            trailing: Icon(Icons.check_circle_outline, color: SubmissionsColors.appBarColor, size: 28), // استخدام اللون المخصص للأيقونة
+                            trailing: Icon(Icons.check_circle_outline, color: SubmissionsColors.appBarColor, size: 28),
                           ),
                         );
                       },

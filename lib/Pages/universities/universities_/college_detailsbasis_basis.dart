@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
 import 'package:hue/core/utils/app_colors.dart';
 import '../departments/AI-CS.dart';

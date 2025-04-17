@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:hue/core/utils/app_colors.dart';
-import 'detail.dart'; // تأكد من أنك أنشأت هذا الملف يحتوي على الصفحات الثانوية
+import 'detail.dart';
 
 class StudentsPage extends StatelessWidget {
   const StudentsPage({super.key});
@@ -20,7 +20,7 @@ class StudentsPage extends StatelessWidget {
           ),
         ),
         centerTitle: true,
-        backgroundColor: StudentsPageColors.primary, // استخدام اللون الأساسي
+        backgroundColor: StudentsPageColors.primary,
         elevation: 8,
       ),
       body: Padding(
