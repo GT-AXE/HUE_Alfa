@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:get/get.dart'; // Import GetX package
-import 'package:hue/Pages/home/welcome.dart'; // Ensure the path is correct
+import 'package:get/get.dart'; 
+import 'package:hue/Pages/home/welcome.dart'; 
 import '../core/utils/app_colors.dart';
-import '../core/utils/constants.dart'; // Ensure the path is correct
+import '../core/utils/constants.dart'; 
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

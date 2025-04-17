@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'DoctorProfilePage.dart';
 
 class DoctorsPage extends StatelessWidget {
 
@@ -6,21 +8,21 @@ class DoctorsPage extends StatelessWidget {
     {
       "name": "Dr. Ahmed",
       "specialty": "Computer Science",
-      "imageUrl": '',
+      "imageUrl": 'https://example.com/dr_ahmed.jpg',
       "experience": "12 Years Experience",
       "rating": 4.0,
     },
     {
       "name": "Dr. Ali",
       "specialty": "Mathematics",
-      "imageUrl": '',
+      "imageUrl": 'https://example.com/dr_ali.jpg',
       "experience": "10 Years Experience",
       "rating": 4.5,
     },
     {
-      "name": "Dr. dalia",
+      "name": "Dr. Dalia",
       "specialty": "Chemistry",
-      "imageUrl": '',
+      "imageUrl": 'https://example.com/dr_dalia.jpg',
       "experience": "8 Years Experience",
       "rating": 4.2,
     },
@@ -33,7 +35,6 @@ class DoctorsPage extends StatelessWidget {
       body: _buildBody(context),
     );
   }
-
 
   AppBar _buildAppBar() {
     return AppBar(
@@ -53,7 +54,6 @@ class DoctorsPage extends StatelessWidget {
       iconTheme: const IconThemeData(color: Colors.white),
     );
   }
-
 
   Widget _buildBody(BuildContext context) {
     return Container(
@@ -76,16 +76,15 @@ class DoctorsPage extends StatelessWidget {
   }
 }
 
-
 class DoctorCard extends StatelessWidget {
   final Map<String, dynamic> doctor;
-  
+
   static const _nameStyle = TextStyle(
     fontSize: 20,
     fontWeight: FontWeight.w600,
     color: Color(0xFF2A3C4E),
   );
-  
+
   static const _specialtyStyle = TextStyle(
     fontSize: 16,
     color: Color(0xFF607D8B),
@@ -97,13 +96,13 @@ class DoctorCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    
+
     return Material(
       borderRadius: BorderRadius.circular(16),
       elevation: 2,
       child: InkWell(
         borderRadius: BorderRadius.circular(16),
-        onTap: () => _showSelectionSnackbar(context, doctor['name']),
+        onTap: () => _navigateToDoctorProfile(context, doctor),
         splashColor: const Color(0xFF33B0E0).withOpacity(0.1),
         highlightColor: Colors.transparent,
         child: Padding(
@@ -113,14 +112,13 @@ class DoctorCard extends StatelessWidget {
             children: [
               _buildProfileImage(screenWidth),
               const SizedBox(width: 16),
-              Expanded(child: _buildDoctorInfo()),
+              Expanded(child: _buildDoctorInfo(context)),
             ],
           ),
         ),
       ),
     );
   }
-
 
   Widget _buildProfileImage(double screenWidth) {
     return Container(
@@ -132,12 +130,16 @@ class DoctorCard extends StatelessWidget {
       ),
       child: doctor['imageUrl'].isEmpty
           ? const Icon(Icons.person_rounded, size: 40, color: Color(0xFF90CAF9))
-          : Image.asset(doctor['imageUrl'], fit: BoxFit.cover),
+          : CachedNetworkImage(
+              imageUrl: doctor['imageUrl'],
+              placeholder: (context, url) => const CircularProgressIndicator(),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
+              fit: BoxFit.cover,
+            ),
     );
   }
 
-
-  Widget _buildDoctorInfo() {
+  Widget _buildDoctorInfo(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -149,11 +151,10 @@ class DoctorCard extends StatelessWidget {
         const SizedBox(height: 12),
         _buildExperienceRow(),
         const SizedBox(height: 12),
-        _buildProfileButton(),
+        _buildProfileButton(context),
       ],
     );
   }
-
 
   Widget _buildRatingRow() {
     return Row(
@@ -165,19 +166,19 @@ class DoctorCard extends StatelessWidget {
           style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w600,
-            color: Color(0xFF607D8B)),
+            color: Color(0xFF607D8B),
+          ),
         ),
       ],
     );
   }
-
 
   Widget _buildStarRating(double rating) {
     return Row(
       children: List.generate(5, (index) {
         final starColor = const Color(0xFFFFC107);
         final starSize = 20.0;
-        
+
         if (index < rating.floor()) {
           return Icon(Icons.star_rounded, color: starColor, size: starSize);
         } else if (index == rating.floor() && rating % 1 >= 0.5) {
@@ -188,11 +189,10 @@ class DoctorCard extends StatelessWidget {
     );
   }
 
-
   Widget _buildExperienceRow() {
     return Row(
       children: [
-        const Icon(Icons.work_history_rounded, 
+        const Icon(Icons.work_history_rounded,
             color: Color(0xFF33B0E0), size: 20),
         const SizedBox(width: 6),
         Text(
@@ -207,14 +207,13 @@ class DoctorCard extends StatelessWidget {
     );
   }
 
-
-  Widget _buildProfileButton() {
+  Widget _buildProfileButton(BuildContext context) {
     return Align(
       alignment: Alignment.centerRight,
       child: ElevatedButton.icon(
         icon: const Icon(Icons.person_outline, size: 18),
         label: const Text('View Profile'),
-        onPressed: () {},
+        onPressed: () => _navigateToDoctorProfile(context, doctor),
         style: ElevatedButton.styleFrom(
           backgroundColor: const Color(0xFF2A75BC),
           foregroundColor: Colors.white,
@@ -227,20 +226,11 @@ class DoctorCard extends StatelessWidget {
     );
   }
 
-
-  void _showSelectionSnackbar(BuildContext context, String name) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Selected: $name'),
-        backgroundColor: const Color(0xFF2A75BC),
-        behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-        duration: const Duration(seconds: 2),
-        action: SnackBarAction(
-          label: 'Undo',
-          textColor: Colors.white,
-          onPressed: () {},
-        ),
+  void _navigateToDoctorProfile(BuildContext context, Map<String, dynamic> doctor) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => DoctorProfilePage(doctor: doctor),
       ),
     );
   }
