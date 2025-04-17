@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:hue/core/utils/app_colors.dart';
-import 'detail_pages.dart'; // تأكد من أنك أنشأت هذا الملف يحتوي على الصفحات الثانوية
+import 'detail.dart'; // تأكد من أنك أنشأت هذا الملف يحتوي على الصفحات الثانوية
 
 class StudentsPage extends StatelessWidget {
   const StudentsPage({super.key});

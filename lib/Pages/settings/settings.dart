@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'ProfilePage.dart';
-import 'AboutPage.dart';
+import 'Profile.dart';
+import 'About.dart';
 import 'Admin.dart';
 import 'package:google_fonts/google_fonts.dart';
 

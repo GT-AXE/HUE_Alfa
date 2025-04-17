@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hue/core/models/role.dart';
-import 'package:hue/core/utils/role_manager.dart';
+import 'package:hue/core/controllers/role_manager.dart';
 import 'package:hue/core/utils/app_colors.dart';
 
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'DepartmentsPage.dart';
 import 'package:hue/core/utils/app_colors.dart';
+import 'college_detailsbasis_basis.dart';
 
 class UniversitiesPage extends StatelessWidget {
   const UniversitiesPage({super.key});
@@ -9,22 +9,13 @@ class UniversitiesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Colleges',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 24,
-            color: Colors.white,
-          ),
-        ),
+        title: const Text('Colleges',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24, color: Colors.white)),
         centerTitle: true,
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-              colors: [
-                UniversitiesColors.appBarGradientStart,
-                UniversitiesColors.appBarGradientEnd,
-              ],
+              colors: [UniversitiesColors.appBarGradientStart, UniversitiesColors.appBarGradientEnd],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
@@ -37,21 +28,14 @@ class UniversitiesPage extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [
-              UniversitiesColors.backgroundStart,
-              UniversitiesColors.backgroundEnd,
-            ],
+            colors: [UniversitiesColors.backgroundStart, UniversitiesColors.backgroundEnd],
           ),
         ),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: GridView.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: 20,
-              crossAxisSpacing: 20,
-              childAspectRatio: 0.8,
-            ),
+              crossAxisCount: 2, mainAxisSpacing: 20, crossAxisSpacing: 20, childAspectRatio: 0.8),
             itemCount: colleges.length,
             itemBuilder: (context, index) {
               final college = colleges[index];
@@ -75,27 +59,23 @@ class CollegeCard extends StatelessWidget {
       elevation: 5,
       shadowColor: UniversitiesColors.cardShadow.withOpacity(0.3),
       child: InkWell(
-        borderRadius: BorderRadius.circular(20),
         onTap: () {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => DepartmentsPage(collegeName: college['title']!),
+              builder: (context) => CollegeDetailsPage(college: college),
             ),
           );
         },
+        borderRadius: BorderRadius.circular(20),
         splashColor: UniversitiesColors.iconShadow.withOpacity(0.2),
         highlightColor: UniversitiesColors.iconShadow.withOpacity(0.1),
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             gradient: LinearGradient(
-              colors: [
-                UniversitiesColors.cardGradientStart,
-                UniversitiesColors.cardGradientEnd,
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
+              colors: [UniversitiesColors.cardGradientStart, UniversitiesColors.cardGradientEnd],
+              begin: Alignment.topLeft, end: Alignment.bottomRight,
             ),
             boxShadow: [
               BoxShadow(
@@ -127,8 +107,7 @@ class CollegeCard extends StatelessWidget {
                   child: ClipOval(
                     child: Image.asset(
                       college['image']!,
-                      width: 80,
-                      height: 80,
+                      width: 80, height: 80,
                       fit: BoxFit.cover,
                       errorBuilder: (context, error, stackTrace) =>
                           const Icon(Icons.school, size: 50, color: Colors.grey),
@@ -156,7 +135,6 @@ class CollegeCard extends StatelessWidget {
   }
 }
 
-// قائمة الكليات
 final List<Map<String, String>> colleges = [
   {'title': 'AICS', 'image': 'assets/images/AI-CS.png'},
   {'title': 'Fine Arts', 'image': 'assets/images/Fine-arts.png'},
@@ -164,10 +142,7 @@ final List<Map<String, String>> colleges = [
   {'title': 'Human Medicine', 'image': 'assets/images/Medicine.png'},
   {'title': 'Pharmacy', 'image': 'assets/images/pharmacy.png'},
   {'title': 'Linguistics', 'image': 'assets/images/Al-Alsun.png'},
-  {
-    'title': 'Applied Health Sciences',
-    'image': 'assets/images/Applied-Health-Sciences-Technology.png'
-  },
+  {'title': 'Applied Health Sciences', 'image': 'assets/images/Applied-Health-Sciences-Technology.png'},
   {'title': 'Business Admin', 'image': 'assets/images/Business.png'},
   {'title': 'Dentistry', 'image': 'assets/images/dentistry-1.png'},
   {'title': 'Engineering', 'image': 'assets/images/engineering.png'},

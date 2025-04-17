@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hue/core/utils/assets.dart';
 import 'package:hue/core/models/role.dart';
-import 'package:hue/core/utils/role_manager.dart';
+import 'package:hue/core/controllers/role_manager.dart';
 import 'package:hue/Pages/staff/staff.dart';
 import '../auth/login.dart';
-import '../college/Colleges.dart';
+import '../universities/universities_/universities_page.dart';
 import '../education/doctors.dart';
 import '../education/students.dart';
 import '../settings/settings.dart';
@@ -55,7 +55,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: HomeColors.appBarColor, // استخدام اللون المحدد لـ AppBar
+      backgroundColor: HomeColors.appBarColor,
       elevation: 10,
       title: Image.asset(Assets.imagesLogoBlue, width: 120, height: 50),
       actions: [
@@ -94,8 +94,8 @@ class CustomBottomNavigationBar extends StatelessWidget {
             child: BottomNavigationBar(
               currentIndex: controller.selectedIndex.value,
               onTap: controller.changePage,
-              selectedItemColor: HomeColors.bottomNavBarSelected, // اللون عند التحديد
-              unselectedItemColor: HomeColors.bottomNavBarUnselected, // اللون عند عدم التحديد
+              selectedItemColor: HomeColors.bottomNavBarSelected, 
+              unselectedItemColor: HomeColors.bottomNavBarUnselected, 
               items: [
                 _buildBottomNavItem(Icons.home, 'Home'),
                 _buildBottomNavItem(Icons.school, 'Colleges'),
@@ -104,7 +104,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
                 _buildBottomNavItem(Icons.settings, 'Settings'),
                 _buildBottomNavItem(Icons.assignment, 'Submissions'),
                 _buildBottomNavItem(Icons.chat, 'Chat'),
-                _buildBottomNavItem(Icons.work, 'Staff'), // زر الموظفين الجديد
+                _buildBottomNavItem(Icons.work, 'Staff'),
               ],
               type: BottomNavigationBarType.fixed,
             ),
@@ -120,7 +120,6 @@ class CustomBottomNavigationBar extends StatelessWidget {
   }
 }
 
-// تحسين التصميم بإضافة تأثيرات للأزرار والإعلانات
 class HomePage extends StatelessWidget {
   final List<Map<String, dynamic>> ads = [
     {'images': Assets.imagesAICS, 'title': 'منح دراسية', 'description': 'تقديم الآن للالتحاق بالمنح الدراسية الدولية'},
@@ -186,8 +185,8 @@ class HomePage extends StatelessWidget {
       child: Card(
         elevation: 6,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-        shadowColor: HomeColors.appBarColor, // تغيير اللون الظل إلى لون AppBar
-        color: HomeColors.adCardColor, // لون الخلفية الخاص ببطاقة الإعلان
+        shadowColor: HomeColors.appBarColor, 
+        color: HomeColors.adCardColor, 
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -200,7 +199,7 @@ class HomePage extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(8),
               child: Text(ad['title'],
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: HomeColors.adCardTextColor), // استخدام لون النص الخاص بالإعلان
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: HomeColors.adCardTextColor),
                   textAlign: TextAlign.center),
             ),
           ],

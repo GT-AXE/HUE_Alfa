@@ -1,8 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:get/get.dart'; // Import GetX package
 import 'package:hue/Pages/home/welcome.dart'; // Ensure the path is correct
+import '../core/utils/app_colors.dart';
+import '../core/utils/constants.dart'; // Ensure the path is correct
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Supabase.initialize(
+    url: Constants.supabaseUrl,
+    anonKey: Constants.supabaseAnonKey,
+  );
+
   runApp(const HueApp());
 }
 
@@ -12,19 +22,18 @@ class HueApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-          debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: false,
       title: 'Hue',
       theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
         brightness: Brightness.light,
-        scaffoldBackgroundColor: Colors.white,
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.deepPurple,
-          foregroundColor: Colors.white,
+        scaffoldBackgroundColor: mainColors.scaffoldBackgroundColor,
+        appBarTheme: AppBarTheme(
+          backgroundColor: mainColors.appBarBackgroundColor, 
+          foregroundColor: mainColors.appBarForegroundColor,
         ),
         textTheme: const TextTheme(
-          bodyLarge: TextStyle(color: Colors.black),
-          bodyMedium: TextStyle(color: Colors.black54),
+          bodyLarge: TextStyle(color: mainColors.bodyTextColor),
+          bodyMedium: TextStyle(color: mainColors.bodyTextColorMedium),
         ),
       ),
       home: const WelcomePage(),

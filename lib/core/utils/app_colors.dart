@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
 
 /// الألوان العامة للتطبيق
+ 
+ class mainColors {
+  static const Color primaryColor = Colors.lightBlue;
+  static const Color scaffoldBackgroundColor = Colors.white;
+  static const Color appBarBackgroundColor = Colors.lightBlue;
+  static const Color appBarForegroundColor = Colors.white;
+  static const Color bodyTextColor = Colors.black;
+  static const Color bodyTextColorMedium = Colors.black54;
+}
 class AppColors {
   static const Color primary = Colors.lightBlue; // اللون الأساسي
   static const Color bubbleSelf = Colors.amber; // فقاعات المستخدم
@@ -186,4 +195,21 @@ class staffColors {
   static const Color bubbleOther = Color(0xFFF0F0F0);
   static const Color textSelf = Colors.white;
   static const Color textOther = Colors.black;
+}
+
+/// ألوان مخصصة لصفحة "CollegeDetails"
+class CollegeDetailsColors {
+  static const Color backgroundGradientStart = Color(0xFF1E3C72);
+  static const Color backgroundGradientEnd = Color(0xFF2A5298);
+
+  static const Color titleText = Colors.white;
+  static const Color subtitleText = Colors.white70;
+
+  static const Color buttonPrimaryBackground = Colors.white;
+  static const Color buttonPrimaryForeground = Colors.black87;
+
+  static const Color buttonSecondaryBackground = Colors.black87;
+  static const Color buttonSecondaryForeground = Colors.white;
+
+  static Color imageShadow = Colors.black.withOpacity(0.2);
 }

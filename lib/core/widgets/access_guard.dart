@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/role.dart';
-import '../utils/role_manager.dart';
+import '../controllers/role_manager.dart';
 
 class AccessGuard extends StatelessWidget {
   final List<Role> requiredRoles;
