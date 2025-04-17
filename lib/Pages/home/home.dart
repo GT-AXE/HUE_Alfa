@@ -1,4 +1,4 @@
-// ignore_for_file: unused_import, use_key_in_widget_constructors, use_super_parameters, deprecated_member_use, avoid_print
+// ignore_for_file: unused_import
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,7 +15,6 @@ import '../academics/submissions.dart';
 import '../chat/chat.dart';
 import 'package:hue/core/utils/app_colors.dart';
 
-
 class HomeController extends GetxController {
   var selectedIndex = 0.obs;
 
@@ -27,7 +26,7 @@ class HomeController extends GetxController {
     SettingsPage(),
     SubmissionsPage(),
     ChatPage(),
-    StaffPage(userRole: Role.hr), 
+    StaffPage(userRole: Role.hr),
   ];
 
   void changePage(int index) {
@@ -62,7 +61,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: Image.asset(Assets.imagesLogoBlue, width: 120, height: 50),
       actions: [
         IconButton(
-          icon: Icon(Icons.logout, color: Colors.yellow),
+          icon: Icon(Icons.login, color: Colors.yellow),
           onPressed: () => Get.offAll(Login()),
         ),
       ],
@@ -79,7 +78,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() => Container(
-          margin: EdgeInsets.all(10),
+          margin: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(30),
             boxShadow: [
@@ -96,8 +95,8 @@ class CustomBottomNavigationBar extends StatelessWidget {
             child: BottomNavigationBar(
               currentIndex: controller.selectedIndex.value,
               onTap: controller.changePage,
-              selectedItemColor: HomeColors.bottomNavBarSelected, 
-              unselectedItemColor: HomeColors.bottomNavBarUnselected, 
+              selectedItemColor: HomeColors.bottomNavBarSelected,
+              unselectedItemColor: HomeColors.bottomNavBarUnselected,
               items: [
                 _buildBottomNavItem(Icons.home, 'Home'),
                 _buildBottomNavItem(Icons.school, 'Colleges'),
@@ -124,9 +123,15 @@ class CustomBottomNavigationBar extends StatelessWidget {
 
 class HomePage extends StatelessWidget {
   final List<Map<String, dynamic>> ads = [
-    {'images': Assets.imagesAICS, 'title': 'منح دراسية', 'description': 'تقديم الآن للالتحاق بالمنح الدراسية الدولية'},
-    {'images': Assets.imagesAICS, 'title': 'دورات صيفية', 'description': 'سجل في برامجنا الصيفية المكثفة'},
-    {'images': Assets.imagesAICS, 'title': 'معرض وظائف', 'description': 'شارك في معرض الوظائف السنوي'},
+    {'images': Assets.imagesHUE, 'title': '1', 'description': ''},
+    {'images': Assets.imagesHUE, 'title': '2', 'description': ''},
+    {'images': Assets.imagesHUE, 'title': '3', 'description': ''},
+    {'images': Assets.imagesHUE, 'title': '4', 'description': ''},
+    {'images': Assets.imagesHUE, 'title': '5', 'description': ''},
+    {'images': Assets.imagesHUE, 'title': '6', 'description': ''},
+    {'images': Assets.imagesHUE, 'title': '7', 'description': ''},
+    {'images': Assets.imagesHUE, 'title': '8', 'description': ''},
+
   ];
 
   @override
@@ -144,8 +149,7 @@ class HomePage extends StatelessWidget {
           ),
           Column(
             children: [
-              _buildAdBanner(),
-              Expanded(child: _buildAdGrid()),
+              Expanded(child: _buildAdGrid(context)),
             ],
           ),
         ],
@@ -153,28 +157,16 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildAdBanner() {
-    return Container(
-      height: 100,
-      margin: EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        image: DecorationImage(
-          image: AssetImage(Assets.imagesLogo),
-          fit: BoxFit.contain,
-        ),
-      ),
-    );
-  }
 
-  Widget _buildAdGrid() {
+
+  Widget _buildAdGrid(BuildContext context) {
     return GridView.builder(
-      padding: EdgeInsets.all(15),
+      padding: EdgeInsets.all(16),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-        crossAxisSpacing: 15,
-        mainAxisSpacing: 15,
-        childAspectRatio: 0.9,
+        crossAxisCount: MediaQuery.of(context).size.width > 600 ? 3 : 2, 
+        crossAxisSpacing: 12,
+        mainAxisSpacing: 12,
+        childAspectRatio: 0.85,
       ),
       itemCount: ads.length,
       itemBuilder: (context, index) => _buildAdItem(ads[index]),
@@ -183,30 +175,53 @@ class HomePage extends StatelessWidget {
 
   Widget _buildAdItem(Map<String, dynamic> ad) {
     return GestureDetector(
-      onTap: () => print('تم النقر على الإعلان: ${ad['title']}'),
+      onTap: () => _onAdTap(ad), 
       child: Card(
-        elevation: 6,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-        shadowColor: HomeColors.appBarColor, 
-        color: HomeColors.adCardColor, 
+        elevation: 8, 
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)), 
+        shadowColor: HomeColors.appBarColor.withOpacity(0.4),
+        color: HomeColors.adCardColor,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Expanded(
               child: ClipRRect(
-                borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
+                borderRadius: BorderRadius.vertical(top: Radius.circular(18)),
                 child: Image.asset(ad['images'], fit: BoxFit.cover),
               ),
             ),
             Padding(
-              padding: EdgeInsets.all(8),
-              child: Text(ad['title'],
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: HomeColors.adCardTextColor),
-                  textAlign: TextAlign.center),
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+              child: Text(
+                ad['title'],
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  color: HomeColors.adCardTextColor,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+              child: Text(
+                ad['description'],
+                style: TextStyle(
+                  fontSize: 12,
+                  color: HomeColors.adCardTextColor.withOpacity(0.7),
+                ),
+                textAlign: TextAlign.center,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis, 
+              ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  void _onAdTap(Map<String, dynamic> ad) {
+    print('تم النقر على الإعلان: ${ad['title']}');
   }
 }
