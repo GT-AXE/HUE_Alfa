@@ -18,14 +18,17 @@ class AppColors {
   static const Color textOther = Colors.black; // النص داخل فقاعة الطرف الآخر
 }
 
-/// ألوان مخصصة لصفحة "Home"
 class HomeColors {
-  static const Color appBarColor = Colors.blue;
-  static const Color bottomNavBarSelected = Colors.yellow;
-  static const Color bottomNavBarUnselected = Colors.blue;
-  static const Color adCardColor = Colors.white;
-  static const Color adCardTextColor = Colors.blueAccent;
-  static const Color adGridBackground = Color(0xFFF0F0F0);
+  static const Color scaffoldBackground = Color(0xFFF8F9FA);
+  static const Color appBarColor = Color.fromARGB(255, 0, 103, 206);
+  static const Color bottomNavBarBackground = Color(0xFF34495E);
+  static const Color bottomNavBarSelected = Color(0xFFF1C40F);
+  static const Color bottomNavBarUnselected = Color(0xFFBDC3C7);
+  static const Color adCardColor = Color(0xFFFFFFFF);
+  static const Color adCardTextColor = Color(0xFF2C3E50);
+  static const Color primaryText = Color(0xFF2C3E50);
+  static const Color secondaryText = Color(0xFF7F8C8D);
+  static const Color cardShadow = Color(0xFF2C3E50);
 }
 
 /// ألوان مخصصة لصفحة "Welcome"
