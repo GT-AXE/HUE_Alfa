@@ -1,240 +1,633 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:iconsax/iconsax.dart';
 
-class AdminPage extends StatefulWidget {
-  const AdminPage({Key? key}) : super(key: key);
+void main() => runApp(const MyApp());
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
-  _AdminPageState createState() => _AdminPageState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'University Admin',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: const Color(0xFFF8FAFD),
+        appBarTheme: const AppBarTheme(
+          elevation: 0,
+          backgroundColor: Colors.white,
+          iconTheme: IconThemeData(color: Colors.black),
+        ),
+      ),
+      home: const AdminDashboard(),
+    );
+  }
 }
 
-class _AdminPageState extends State<AdminPage> {
+class AdminDashboard extends StatefulWidget {
+  const AdminDashboard({super.key});
+
+  @override
+  State<AdminDashboard> createState() => _AdminDashboardState();
+}
+
+class _AdminDashboardState extends State<AdminDashboard> {
+  int _currentIndex = 0;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
+      backgroundColor: const Color(0xFFF8FAFD),
       appBar: _buildAppBar(),
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.blue.shade50, Colors.blue.shade100],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildHeader(),
-              const SizedBox(height: 10),
-              _buildCustomDivider(),
-              const SizedBox(height: 15),
-              Expanded(
-                child: ListView.builder(
-                  physics: const BouncingScrollPhysics(),
-                  itemCount: adminItems.length,
-                  itemBuilder: (context, index) {
-                    final item = adminItems[index];
-                    return _buildAdminItem(item);
-                  },
-                ),
-              ),
-            ],
-          ),
-        ),
+      body: IndexedStack(
+        index: _currentIndex,
+        children: const [
+          HomeScreen(),
+          AnalyticsScreen(),
+          MessagesScreen(),
+          SettingsScreen(),
+        ],
       ),
+      bottomNavigationBar: _buildBottomNavBar(),
+      floatingActionButton: _buildFloatingButton(),
+      drawer: _buildSideDrawer(),
     );
   }
 
   AppBar _buildAppBar() {
     return AppBar(
       title: Text(
-        'Admin Panel',
+        _getAppBarTitle(),
         style: GoogleFonts.poppins(
-          color: Colors.white,
-          fontWeight: FontWeight.w700,
-          fontSize: 22,
+          fontSize: 20,
+          fontWeight: FontWeight.w600,
+          color: Colors.black,
         ),
-      ),
-      centerTitle: true,
-      elevation: 8,
-      backgroundColor: Colors.blueAccent.shade700,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
       ),
       actions: [
         IconButton(
-          icon: const Icon(Icons.notifications, color: Colors.white),
+          icon: Badge(
+            smallSize: 8,
+            child: const Icon(Iconsax.notification, size: 24),
+          ),
           onPressed: () {},
         ),
         IconButton(
-          icon: const Icon(Icons.logout, color: Colors.white),
+          icon: const CircleAvatar(
+            radius: 16,
+            backgroundImage: NetworkImage(''),
+          ),
           onPressed: () {},
         ),
+        const SizedBox(width: 10),
       ],
     );
   }
 
-  Widget _buildHeader() {
+  Widget _buildBottomNavBar() {
+    return Container(
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.2),
+            blurRadius: 20,
+            offset: const Offset(0, -5),
+          ),
+        ],
+      ),
+      child: ClipRRect(
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+        child: BottomNavigationBar(
+          currentIndex: _currentIndex,
+          onTap: (index) => setState(() => _currentIndex = index),
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Colors.white,
+          selectedItemColor: const Color(0xFF3D5CFF),
+          unselectedItemColor: Colors.grey,
+          selectedLabelStyle: GoogleFonts.poppins(fontSize: 11),
+          unselectedLabelStyle: GoogleFonts.poppins(fontSize: 11),
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Iconsax.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Iconsax.chart_2),
+              label: 'Analytics',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Iconsax.message),
+              label: 'Messages',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Iconsax.setting_2),
+              label: 'Settings',
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildFloatingButton() {
+    return FloatingActionButton(
+      onPressed: () => _showQuickActions(context),
+      backgroundColor: const Color(0xFF3D5CFF),
+      elevation: 5,
+      child: const Icon(Iconsax.add, color: Colors.white, size: 28),
+    );
+  }
+
+  Widget _buildSideDrawer() {
+    return Drawer(
+      width: MediaQuery.of(context).size.width * 0.75,
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: [
+          Container(
+            height: 220,
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [Color(0xFF3D5CFF), Color(0xFF5B8DFF)],
+              ),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const CircleAvatar(
+                  radius: 40,
+                  backgroundImage: NetworkImage(''),
+                ),
+                const SizedBox(height: 15),
+                Text(
+                  'Dr. Ahmed Mohamed',
+                  style: GoogleFonts.poppins(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(height: 5),
+                Text(
+                  'dev_axe@horus.edu.eg',
+                  style: GoogleFonts.poppins(
+                    color: Colors.white.withOpacity(0.8),
+                    fontSize: 14,
+                  ),
+                ),
+                const SizedBox(height: 15),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Text(
+                    'Super Admin',
+                    style: GoogleFonts.poppins(
+                      color: Colors.white,
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          _drawerItem(Iconsax.home, 'Dashboard', 0),
+          _drawerItem(Iconsax.profile_2user, 'Students', null),
+          _drawerItem(Iconsax.teacher, 'Faculty', null),
+          _drawerItem(Iconsax.book, 'Courses', null),
+          _drawerItem(Iconsax.calendar, 'Schedule', null),
+          _drawerItem(Iconsax.note, 'Exams', null),
+          const Divider(indent: 20, endIndent: 20),
+          _drawerItem(Iconsax.setting_2, 'Settings', 3),
+          _drawerItem(Iconsax.support, 'Help Center', null),
+          _drawerItem(Iconsax.logout, 'Sign Out', null),
+        ],
+      ),
+    );
+  }
+
+  Widget _drawerItem(IconData icon, String title, int? index) {
+    return ListTile(
+      leading: Icon(icon, color: _currentIndex == index ? const Color(0xFF3D5CFF) : Colors.grey[700]),
+      title: Text(
+        title,
+        style: GoogleFonts.poppins(
+          fontWeight: _currentIndex == index ? FontWeight.w600 : FontWeight.normal,
+          color: _currentIndex == index ? const Color(0xFF3D5CFF) : Colors.grey[800],
+        ),
+      ),
+      onTap: () {
+        if (index != null) setState(() => _currentIndex = index);
+        Navigator.pop(context);
+      },
+    );
+  }
+
+  void _showQuickActions(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
+      ),
+      builder: (context) {
+        return Container(
+          padding: const EdgeInsets.all(20),
+          height: 300,
+          child: Column(
+            children: [
+              Container(
+                width: 50,
+                height: 5,
+                decoration: BoxDecoration(
+                  color: Colors.grey[300],
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              const SizedBox(height: 15),
+              Text(
+                'Quick Actions',
+                style: GoogleFonts.poppins(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const SizedBox(height: 20),
+              GridView.count(
+                shrinkWrap: true,
+                crossAxisCount: 3,
+                childAspectRatio: 0.9,
+                children: [
+                  _quickAction(Iconsax.profile_add, 'Add Student', Colors.blue),
+                  _quickAction(Iconsax.teacher, 'Add Faculty', Colors.green),
+                  _quickAction(Iconsax.book, 'New Course', Colors.orange),
+                  _quickAction(Iconsax.calendar_add, 'Add Event', Colors.purple),
+                  _quickAction(Iconsax.note_add, 'Create Exam', Colors.red),
+                  _quickAction(Iconsax.document_upload, 'Upload', Colors.teal),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _quickAction(IconData icon, String label, Color color) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          "Admin Dashboard",
-          style: GoogleFonts.poppins(
-            fontSize: 26,
-            fontWeight: FontWeight.bold,
-            color: Colors.blue.shade800,
+        Container(
+          width: 60,
+          height: 60,
+          decoration: BoxDecoration(
+            color: color.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(15),
           ),
+          child: Icon(icon, color: color, size: 28),
         ),
-        const SizedBox(height: 5),
+        const SizedBox(height: 8),
         Text(
-          "Manage university operations efficiently",
-          style: GoogleFonts.poppins(
-            fontSize: 14,
-            color: Colors.grey.shade700,
-          ),
+          label,
+          style: GoogleFonts.poppins(fontSize: 12),
+          textAlign: TextAlign.center,
         ),
       ],
     );
   }
 
-  Widget _buildCustomDivider() {
-    return Divider(
-      thickness: 2,
-      color: Colors.blue.shade400,
+  String _getAppBarTitle() {
+    switch (_currentIndex) {
+      case 0: return 'Dashboard';
+      case 1: return 'Analytics';
+      case 2: return 'Messages';
+      case 3: return 'Settings';
+      default: return 'Admin Panel';
+    }
+  }
+}
+
+
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              gradient: const LinearGradient(
+                colors: [Color(0xFF3D5CFF), Color(0xFF5B8DFF)],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: const Color(0xFF3D5CFF).withOpacity(0.3),
+                  blurRadius: 15,
+                  offset: const Offset(0, 8),
+                ),
+              ],
+            ),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Welcome Back!',
+                        style: GoogleFonts.poppins(
+                          color: Colors.white.withOpacity(0.9),
+                          fontSize: 16,
+                        ),
+                      ),
+                      const SizedBox(height: 5),
+                      Text(
+                        'University Admin',
+                        style: GoogleFonts.poppins(
+                          color: Colors.white,
+                          fontSize: 22,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        '5 new notifications\n3 pending tasks today',
+                        style: GoogleFonts.poppins(
+                          color: Colors.white.withOpacity(0.8),
+                          fontSize: 14,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const CircleAvatar(
+                  radius: 40,
+                  backgroundColor: Colors.white,
+                  backgroundImage: NetworkImage(''),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 25),
+          Text(
+            'Quick Access',
+            style: GoogleFonts.poppins(
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          const SizedBox(height: 15),
+          GridView.count(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            crossAxisCount: 4,
+            childAspectRatio: 0.9,
+            children: [
+              _quickAccessItem(Iconsax.profile_2user, 'Students', Colors.blue),
+              _quickAccessItem(Iconsax.teacher, 'Faculty', Colors.green),
+              _quickAccessItem(Iconsax.book, 'Courses', Colors.orange),
+              _quickAccessItem(Iconsax.calendar, 'Schedule', Colors.purple),
+              _quickAccessItem(Iconsax.note, 'Exams', Colors.red),
+              _quickAccessItem(Iconsax.document, 'Reports', Colors.teal),
+              _quickAccessItem(Iconsax.setting_2, 'Settings', Colors.indigo),
+              _quickAccessItem(Iconsax.more, 'More', Colors.grey),
+            ],
+          ),
+          const SizedBox(height: 25),
+          Text(
+            'Statistics',
+            style: GoogleFonts.poppins(
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          const SizedBox(height: 15),
+          SizedBox(
+            height: 120,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: [
+                _statCard('12,456', 'Students', Iconsax.profile_2user, Colors.blue, '4.5%'),
+                const SizedBox(width: 12),
+                _statCard('1,245', 'Faculty', Iconsax.teacher, Colors.green, '2.1%'),
+                const SizedBox(width: 12),
+                _statCard('356', 'Courses', Iconsax.book, Colors.orange, '7.8%'),
+                const SizedBox(width: 12),
+                _statCard('24', 'Departments', Iconsax.building_3, Colors.purple, '1.2%'),
+              ],
+            ),
+          ),
+          const SizedBox(height: 25),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Recent Activity',
+                style: GoogleFonts.poppins(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              TextButton(
+                onPressed: () {},
+                child: Text(
+                  'View All',
+                  style: GoogleFonts.poppins(
+                    color: const Color(0xFF3D5CFF),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          _activityItem(Iconsax.profile_add, 'New student registered', '10 min ago', Colors.blue),
+          _activityItem(Iconsax.edit, 'Course CS101 updated', '25 min ago', Colors.green),
+          _activityItem(Iconsax.calendar, 'Exam schedule published', '1 hour ago', Colors.orange),
+        ],
+      ),
     );
   }
 
-  Widget _buildAdminItem(Map<String, dynamic> item) {
-    return GestureDetector(
-      onTap: () => Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => item['page']),
-      ),
-      child: Card(
-        elevation: 5,
-        margin: const EdgeInsets.symmetric(vertical: 8.0),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        child: ListTile(
-          contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          leading: CircleAvatar(
-            backgroundColor: Colors.blue.withOpacity(0.15),
-            radius: 25,
-            child: Icon(item['icon'], color: Colors.blue.shade700, size: 28),
+  Widget _quickAccessItem(IconData icon, String label, Color color) {
+    return Column(
+      children: [
+        Container(
+          width: 60,
+          height: 60,
+          decoration: BoxDecoration(
+            color: color.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(15),
           ),
-          title: Text(
-            item['title'],
-            style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.w600),
-          ),
-          subtitle: Text(
-            item['subtitle'],
-            style: GoogleFonts.poppins(fontSize: 14, color: Colors.grey.shade600),
-          ),
-          trailing: const Icon(Icons.arrow_forward_ios, color: Colors.grey),
+          child: Icon(icon, color: color, size: 28),
         ),
+        const SizedBox(height: 8),
+        Text(
+          label,
+          style: GoogleFonts.poppins(fontSize: 12),
+          textAlign: TextAlign.center,
+        ),
+      ],
+    );
+  }
+
+  Widget _statCard(String value, String label, IconData icon, Color color, String percent) {
+    return Container(
+      width: 160,
+      padding: const EdgeInsets.all(15),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(15),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.1),
+            blurRadius: 10,
+            offset: const Offset(0, 5),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: color.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Icon(icon, color: color, size: 20),
+              ),
+              const Spacer(),
+              const Icon(Iconsax.arrow_up_1, color: Colors.green, size: 16),
+              Text(
+                ' $percent',
+                style: GoogleFonts.poppins(
+                  color: Colors.green,
+                  fontSize: 12,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 15),
+          Text(
+            value,
+            style: GoogleFonts.poppins(
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          Text(
+            label,
+            style: GoogleFonts.poppins(
+              color: Colors.grey,
+              fontSize: 13,
+            ),
+          ),
+        ],
       ),
     );
   }
 
-  final List<Map<String, dynamic>> adminItems = [
-    {
-      'icon': Icons.supervisor_account,
-      'title': 'Manage Students',
-      'subtitle': 'View and manage student records',
-      'page': ManageStudentsPage(),
-    },
-    {
-      'icon': Icons.school,
-      'title': 'Manage Professors',
-      'subtitle': 'View and manage professor details',
-      'page': ManageProfessorsPage(),
-    },
-    {
-      'icon': Icons.menu_book,
-      'title': 'Manage Courses',
-      'subtitle': 'Add or modify university courses',
-      'page': ManageCoursesPage(),
-    },
-    {
-      'icon': Icons.schedule,
-      'title': 'Class Schedules',
-      'subtitle': 'Manage class timetables and schedules',
-      'page': ClassSchedulesPage(),
-    },
-    {
-      'icon': Icons.assignment,
-      'title': 'Exams & Grades',
-      'subtitle': 'Monitor exams and student grades',
-      'page': ExamsGradesPage(),
-    },
-    {
-      'icon': Icons.settings,
-      'title': 'System Settings',
-      'subtitle': 'Configure application settings',
-      'page': SystemSettingsPage(),
-    },
-  ];
-}
-
-
-class ManageStudentsPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Manage Students')),
-      body: Center(child: Text('Students Management Page')),
+  Widget _activityItem(IconData icon, String title, String time, Color color) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: color.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Icon(icon, color: color, size: 20),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: GoogleFonts.poppins(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                Text(
+                  time,
+                  style: GoogleFonts.poppins(
+                    color: Colors.grey,
+                    fontSize: 12,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Icon(Iconsax.arrow_right_3, size: 18),
+        ],
+      ),
     );
   }
 }
 
-class ManageProfessorsPage extends StatelessWidget {
+class AnalyticsScreen extends StatelessWidget {
+  const AnalyticsScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Manage Professors')),
-      body: Center(child: Text('Professors Management Page')),
+    return Center(
+      child: Text(
+        'Analytics',
+        style: GoogleFonts.poppins(fontSize: 24),
+      ),
     );
   }
 }
 
-class ManageCoursesPage extends StatelessWidget {
+class MessagesScreen extends StatelessWidget {
+  const MessagesScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Manage Courses')),
-      body: Center(child: Text('Courses Management Page')),
+    return Center(
+      child: Text(
+        'Messages',
+        style: GoogleFonts.poppins(fontSize: 24),
+      ),
     );
   }
 }
 
-class ClassSchedulesPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Class Schedules')),
-      body: Center(child: Text('Schedules Management Page')),
-    );
-  }
-}
+class SettingsScreen extends StatelessWidget {
+  const SettingsScreen({super.key});
 
-class ExamsGradesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Exams & Grades')),
-      body: Center(child: Text('Exams & Grades Management Page')),
-    );
-  }
-}
-
-class SystemSettingsPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('System Settings')),
-      body: Center(child: Text('System Settings Page')),
+    return Center(
+      child: Text(
+        'Settings',
+        style: GoogleFonts.poppins(fontSize: 24),
+      ),
     );
   }
 }

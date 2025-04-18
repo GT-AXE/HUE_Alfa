@@ -94,7 +94,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 title: 'Admin Panel',
                 onTap: () => Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => AdminPage()),
+                  MaterialPageRoute(builder: (context) => AdminDashboard()),
                 ),
               ),
             ],
