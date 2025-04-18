@@ -5,20 +5,16 @@ workflows:
   ios:
     name: iOS Workflow
     platform: ios
-    ios:
-      build:
-        flutter: true
-        target: lib/main.dart
-        release: true
+    flutter:
+      target: lib/main.dart
+      build: release
     artifacts:
       - build/ios/ipa
   android:
     name: Android Workflow
     platform: android
-    android:
-      build:
-        flutter: true
-        target: lib/main.dart
-        release: true
+    flutter:
+      target: lib/main.dart
+      build: release
     artifacts:
       - build/app/outputs/flutter-apk/app-release.apk
