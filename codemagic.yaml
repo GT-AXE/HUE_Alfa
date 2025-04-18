@@ -4,17 +4,19 @@ name: HUE_Alfa
 workflows:
   ios:
     name: iOS Workflow
-    platform: ios
-    flutter:
-      target: lib/main.dart
-      build: release
+    flutter: true
+    scripts:
+      - name: Build iOS
+        script: |
+          flutter build ios --release
     artifacts:
       - build/ios/ipa
   android:
     name: Android Workflow
-    platform: android
-    flutter:
-      target: lib/main.dart
-      build: release
+    flutter: true
+    scripts:
+      - name: Build Android
+        script: |
+          flutter build apk --release
     artifacts:
       - build/app/outputs/flutter-apk/app-release.apk
