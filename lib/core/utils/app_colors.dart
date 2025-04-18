@@ -213,3 +213,24 @@ class CollegeDetailsColors {
 
   static Color imageShadow = Colors.black.withOpacity(0.2);
 }
+
+
+/// ألوان مخصصة لصفحة "CourseDetails"
+class CourseDetailsColors {
+  // خلفية العنصر في الوضع الفاتح
+  static const Color lightBackground = Color(0xFFF5F5F5);
+
+  // خلفية العنصر في الوضع الداكن
+  static const Color darkBackground = Color(0xFF424242);
+
+  // ظل النص في الصورة
+  static const Color textShadow = Colors.black;
+
+  // تدرج الصورة العلوية
+  static const Color gradientStart = Colors.black87;
+  static const Color gradientEnd = Colors.transparent;
+
+  // لون المؤشر الأساسي في حالة placeholder أو errorWidget
+  static const Color fallbackBackgroundLight = Color(0xFFEEEEEE);
+  static const Color fallbackBackgroundDark = Color(0xFF303030);
+}

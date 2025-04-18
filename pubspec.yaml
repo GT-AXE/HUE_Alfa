@@ -12,6 +12,7 @@ dependencies:
     sdk: flutter
   get: ^4.7.2
   cupertino_icons: ^1.0.8
+  flutter_rating_bar: ^4.0.0
   shimmer: ^2.0.0
   video_player: ^2.9.2
   image_picker: ^1.0.4
