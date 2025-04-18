@@ -4,7 +4,7 @@ name: HUE_Alfa
 workflows:
   ios:
     name: iOS Workflow
-    flutter: true
+    flutter: false
     scripts:
       - name: Build iOS
         script: |
