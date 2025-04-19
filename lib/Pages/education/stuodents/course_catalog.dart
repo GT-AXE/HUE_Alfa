@@ -24,7 +24,6 @@ class _CoursesPageState extends State<CoursesPage> {
   void initState() {
     super.initState();
     _filteredCourses = _courses;
-    // Simulate loading
     Future.delayed(const Duration(seconds: 1), () {
       setState(() => _isLoading = false);
     });

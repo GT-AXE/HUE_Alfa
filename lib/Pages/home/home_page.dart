@@ -14,7 +14,6 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          // خلفية الصورة
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
@@ -34,7 +33,6 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  // بانر الإعلانات
   Widget _buildAdBanner() {
     return Container(
       height: 120,
@@ -49,12 +47,11 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  // شبكة الإعلانات
   Widget _buildAdGrid(BuildContext context) {
     return GridView.builder(
       padding: EdgeInsets.all(16),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: MediaQuery.of(context).size.width > 600 ? 3 : 2, // تغيير الأعمدة بناءً على حجم الشاشة
+        crossAxisCount: MediaQuery.of(context).size.width > 600 ? 3 : 2,
         crossAxisSpacing: 12,
         mainAxisSpacing: 12,
         childAspectRatio: 0.85,
@@ -64,13 +61,12 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  // عنصر الإعلان في الشبكة
   Widget _buildAdItem(BuildContext context, Map<String, dynamic> ad) {
     return GestureDetector(
-      onTap: () => _onAdTap(ad), // معالجة الضغط على الإعلان
+      onTap: () => _onAdTap(ad), 
       child: Card(
-        elevation: 8, // زيادة الظل قليلاً لإبراز العنصر
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)), // تحسين الزوايا
+        elevation: 8,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
         shadowColor: HomeColors.appBarColor.withOpacity(0.4),
         color: HomeColors.adCardColor,
         child: Column(
@@ -104,7 +100,7 @@ class HomePage extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
                 maxLines: 2,
-                overflow: TextOverflow.ellipsis, // إضافة خاصية نص قصير
+                overflow: TextOverflow.ellipsis, 
               ),
             ),
           ],
@@ -113,9 +109,7 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  // دالة التعامل مع الضغط على الإعلان
   void _onAdTap(Map<String, dynamic> ad) {
     print('تم النقر على الإعلان: ${ad['title']}');
-    // يمكن إضافة التنقل لصفحة تفاصيل الإعلان هنا
   }
 }

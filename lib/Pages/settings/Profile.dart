@@ -91,7 +91,6 @@ class _ProfilePageState extends State<ProfilePage> {
                     child: ElevatedButton(
                       onPressed: () {
                         Navigator.pop(context);
-                        // Add your logout logic here
                       },
                       child: Text('تسجيل خروج', style: TextStyle(fontFamily: 'Tajawal')),
                       style: ElevatedButton.styleFrom(

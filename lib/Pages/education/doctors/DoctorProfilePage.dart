@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:hue/core/utils/app_colors.dart'; // ← غيّر الاسم حسب مشروعك
+import 'package:hue/core/utils/app_colors.dart';
 
 class DoctorProfilePage extends StatelessWidget {
   final Map<String, dynamic> doctor;

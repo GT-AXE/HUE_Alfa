@@ -76,7 +76,6 @@ class _ForumsPageState extends State<ForumsPage> {
   @override
   void initState() {
     super.initState();
-    // Simulate loading data
     Future.delayed(const Duration(seconds: 2), () {
       setState(() => _isLoading = false);
     });
@@ -165,7 +164,6 @@ class _ForumsPageState extends State<ForumsPage> {
         ),
         child: Column(
           children: [
-            // Search Bar
             Padding(
               padding: const EdgeInsets.all(16),
               child: TextField(
@@ -184,7 +182,6 @@ class _ForumsPageState extends State<ForumsPage> {
               ),
             ),
 
-            // Categories Chips
             SizedBox(
               height: 50,
               child: ListView(
@@ -212,7 +209,6 @@ class _ForumsPageState extends State<ForumsPage> {
               ),
             ),
 
-            // Trending Section
             if (_trendingForums.isNotEmpty)
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
@@ -253,7 +249,6 @@ class _ForumsPageState extends State<ForumsPage> {
                 ),
               ),
 
-            // All Forums Section
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
               child: Row(

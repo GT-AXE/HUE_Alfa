@@ -198,6 +198,7 @@ class staffColors {
   static const Color bubbleOther = Color(0xFFF0F0F0);
   static const Color textSelf = Colors.white;
   static const Color textOther = Colors.black;
+  static const Color secondary = Color(0xFF03DAC6);
 }
 
 /// ألوان مخصصة لصفحة "CollegeDetails"

@@ -88,7 +88,6 @@ class SchedulePage extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             
-            // Day filter chips
             SizedBox(
               height: 50,
               child: ListView(
@@ -167,7 +166,6 @@ class SchedulePage extends StatelessWidget {
     return InkWell(
       borderRadius: BorderRadius.circular(16),
       onTap: () {
-        // Show a nice dialog when tapped
         _showClassDetails(context, subject, day, time, color, icon);
       },
       child: Container(
@@ -186,7 +184,6 @@ class SchedulePage extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           child: Row(
             children: [
-              // Colored icon container
               Container(
                 width: 50,
                 height: 50,
@@ -202,7 +199,6 @@ class SchedulePage extends StatelessWidget {
               ),
               const SizedBox(width: 16),
               
-              // Class details
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -245,7 +241,6 @@ class SchedulePage extends StatelessWidget {
                 ),
               ),
               
-              // Edit button
               IconButton(
                 icon: Icon(Icons.edit_outlined,
                     color: Colors.grey.shade400),

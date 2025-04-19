@@ -20,7 +20,6 @@ class _LoginState extends State<Login> {
   bool _isLoading = false;
   bool _obscurePassword = true;
 
-  // عرض رسالة منبثقة
   void _showSnackBar(String message, {Color color = LoginColors.errorColor}) {
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -33,19 +32,16 @@ class _LoginState extends State<Login> {
     }
   }
 
-  // التحقق من صحة البريد الإلكتروني
   bool _isEmailValid(String email) {
     return RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(email);
   }
 
-  // التحقق من صحة كلمة المرور
   bool _isPasswordValid(String password) {
     return password.length >= 8;
   }
 
-  // وظيفة تسجيل الدخول
   Future<void> _login() async {
-    if (_isLoading) return; // تجنب إرسال طلبات متعددة أثناء التحميل
+    if (_isLoading) return; 
 
     final email = _emailController.text.trim();
     final password = _passwordController.text.trim();
@@ -74,24 +70,21 @@ class _LoginState extends State<Login> {
       );
 
       if (response.user != null && mounted) {
-        // عند النجاح في تسجيل الدخول، الانتقال إلى الصفحة الرئيسية
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (_) => Home()),
-          (route) => false, // إزالة جميع الصفحات السابقة
+          (route) => false,
         );
       } else {
         _showSnackBar('فشل تسجيل الدخول، تأكد من بياناتك');
       }
     } on AuthException catch (e) {
-      // التعامل مع أخطاء مصادقة Supabase
       _showSnackBar(e.message);
     } catch (e) {
-      // التعامل مع الأخطاء العامة
       _showSnackBar('حدث خطأ غير متوقع');
       print('Login error: $e');
     } finally {
-      if (mounted) setState(() => _isLoading = false); // إيقاف التحميل
+      if (mounted) setState(() => _isLoading = false); 
     }
   }
 

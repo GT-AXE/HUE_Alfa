@@ -9,7 +9,6 @@ class AboutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Define theme for consistent styling
     final theme = ThemeData(
       textTheme: GoogleFonts.poppinsTextTheme(),
       cardTheme: CardTheme(
@@ -48,7 +47,6 @@ class AboutPage extends StatelessWidget {
             padding: const EdgeInsets.all(24),
             child: Column(
               children: [
-                // Animated logo with fade-in effect
                 AnimatedOpacity(
                   opacity: 1.0,
                   duration: const Duration(milliseconds: 800),
@@ -65,7 +63,6 @@ class AboutPage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 24),
-                // App Information Card
                 _buildAnimatedCard(
                   icon: Icons.info,
                   title: 'App Information',
@@ -76,7 +73,6 @@ class AboutPage extends StatelessWidget {
                     _buildRow('Developer', 'AXE'),
                   ],
                 ),
-                // Features Card
                 _buildAnimatedCard(
                   icon: Icons.list,
                   title: 'Features',
@@ -87,7 +83,6 @@ class AboutPage extends StatelessWidget {
                     'Access to Educational Resources',
                   ].map((e) => _buildBullet(e)).toList(),
                 ),
-                // Contact Card
                 _buildAnimatedCard(
                   icon: Icons.contact_page,
                   title: 'Contact',
@@ -116,7 +111,6 @@ class AboutPage extends StatelessWidget {
     );
   }
 
-  // Build an animated card with scale transition
   Widget _buildAnimatedCard({
     required IconData icon,
     required String title,
@@ -160,7 +154,6 @@ class AboutPage extends StatelessWidget {
     );
   }
 
-  // Build a row for key-value pairs
   Widget _buildRow(String label, String value) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
@@ -187,7 +180,6 @@ class AboutPage extends StatelessWidget {
     );
   }
 
-  // Build a bullet point for features
   Widget _buildBullet(String text) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6),
@@ -207,7 +199,6 @@ class AboutPage extends StatelessWidget {
     );
   }
 
-  // Build a contact row with tap functionality
   Widget _buildContact({
     required IconData icon,
     required String text,
@@ -236,13 +227,11 @@ class AboutPage extends StatelessWidget {
     );
   }
 
-  // Launch URLs for email and phone
   Future<void> _launchUrl(String url) async {
     final uri = Uri.parse(url);
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri);
     } else {
-      // Handle error (e.g., show a snackbar)
     }
   }
 }

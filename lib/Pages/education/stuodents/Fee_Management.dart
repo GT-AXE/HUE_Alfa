@@ -37,7 +37,6 @@ class PaymentPage extends StatelessWidget {
               trailing: fee['status'] == 'Unpaid'
                   ? ElevatedButton(
                       onPressed: () {
-                        // هنا تضع كود الدفع الفعلي
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text('Processing payment for ${fee['title']}...')),
                         );
