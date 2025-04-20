@@ -238,3 +238,14 @@ class CourseDetailsColors {
   static const Color fallbackBackgroundLight = Color(0xFFEEEEEE);
   static const Color fallbackBackgroundDark = Color(0xFF303030);
 }
+
+class classColors {
+  static const primary = Color(0xFF1565C0);
+  static const secondary = Color(0xFF42A5F5);
+  static const background = Color(0xFFF5F5F5);
+  static const text = Color(0xFF212121);
+
+  // مثال على تخصيص حسب الصفحة
+  static const studentsCard = Color(0xFFE1F5FE);
+  static const staffCard = Color(0xFFFFF3E0);
+}

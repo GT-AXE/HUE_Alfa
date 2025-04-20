@@ -21,12 +21,9 @@ class _StaffPageState extends State<StaffPage> {
   final TextEditingController _positionController = TextEditingController();
 
   List<Map<String, String>> _staffList = [];
-
   final Map<String, List<Role>> _sections = {
-    "Administration": RoleManager.adminRoles,
     "Faculty Members": RoleManager.facultyRoles,
     "Student Services": RoleManager.studentRoles,
-    "Management": RoleManager.staffRoles,
   };
 
   @override
@@ -42,7 +39,6 @@ class _StaffPageState extends State<StaffPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(),
-      drawer: _buildDrawer(),
       body: _buildBody(),
       floatingActionButton: _buildFloatingActionButton(),
     );
@@ -51,7 +47,7 @@ class _StaffPageState extends State<StaffPage> {
   AppBar _buildAppBar() {
     return AppBar(
       title: const Text(
-        "Staff Management",
+        "Staff Dashboard",
         style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
       ),
       backgroundColor: AppColors.primary,
@@ -60,58 +56,9 @@ class _StaffPageState extends State<StaffPage> {
     );
   }
 
-  Widget _buildDrawer() {
-    return Drawer(
-      child: Column(
-        children: [
-          UserAccountsDrawerHeader(
-            accountName: const Text('Admin User'),
-            accountEmail: const Text('dev_axe@horus.edu.eg'),
-            currentAccountPicture: CircleAvatar(
-              backgroundColor: AppColors.primary,
-              child: const Icon(Icons.person, color: Colors.white),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: TextField(
-              controller: _searchController,
-              decoration: const InputDecoration(
-                hintText: 'Search staff by ID or Name...',
-                prefixIcon: Icon(Icons.search),
-                border: OutlineInputBorder(),
-              ),
-              onChanged: (value) {
-                setState(() {});
-              },
-            ),
-          ),
-          Expanded(
-            child: ListView(
-              children: _sections.keys
-                  .where((section) => section
-                      .toLowerCase()
-                      .contains(_searchController.text.toLowerCase()))
-                  .map((section) => ListTile(
-                        title: Text(section),
-                        onTap: () {
-                          setState(() {
-                            _selectedSection = section;
-                          });
-                          Navigator.pop(context);
-                        },
-                      ))
-                  .toList(),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget _buildBody() {
     return Padding(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -119,20 +66,20 @@ class _StaffPageState extends State<StaffPage> {
             _selectedSection,
             style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: AppColors.primary),
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 10),
           _buildSearchField(),
-          const SizedBox(height: 16),
+          const SizedBox(height: 10),
           Expanded(
             child: Card(
-              elevation: 4,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+              elevation: 15,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
               child: Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.all(10.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     _buildSectionStats(),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 10),
                     Expanded(child: _buildDataTable()),
                   ],
                 ),
@@ -164,7 +111,7 @@ class _StaffPageState extends State<StaffPage> {
   Widget _buildSectionStats() {
     return Row(
       children: [
-        _buildStatCard("Total user", _staffList.length.toString(), Icons.people),
+        _buildStatCard("Total users", _staffList.length.toString(), Icons.people_sharp),
         const SizedBox(width: 16),
         _buildStatCard("Active", _staffList.where((staff) => staff['status'] == 'Active').length.toString(), Icons.check_circle),
         const SizedBox(width: 16),
@@ -176,25 +123,24 @@ class _StaffPageState extends State<StaffPage> {
   Widget _buildStatCard(String title, String value, IconData icon) {
     return Expanded(
       child: Card(
-        elevation: 2,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         color: AppColors.primary.withOpacity(0.05),
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 children: [
                   Icon(icon, color: AppColors.primary),
-                  const SizedBox(width: 8),
-                  Text(title, style: const TextStyle(fontSize: 14, color: Colors.grey)),
+                  const SizedBox(width: 4),
+                  Text(title, style: const TextStyle(fontSize: 15, color: Color.fromARGB(255, 0, 0, 0))),
                 ],
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 3),
               Text(
                 value,
-                style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: AppColors.primary),
+                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color.fromARGB(255, 0, 0, 0)),
               ),
             ],
           ),
@@ -202,66 +148,98 @@ class _StaffPageState extends State<StaffPage> {
       ),
     );
   }
-
-  Widget _buildDataTable() {
-    return SingleChildScrollView(
-      child: DataTable(
-        columns: const [
-          DataColumn(label: Text("ID")),
-          DataColumn(label: Text("Name")),
-          DataColumn(label: Text("Position")),
-          DataColumn(label: Text("Status")),
-          DataColumn(label: Text("Actions")),
-        ],
-        rows: _staffList
+Widget _buildDataTable() {
+  return SingleChildScrollView(
+    scrollDirection: Axis.vertical, // Enable vertical scrolling
+    child: Column(
+      children: [
+        // Add header row
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: Row(
+            children: [
+              _buildHeaderCell("ID"),
+              _buildHeaderCell("Name"),
+              _buildHeaderCell("Position"),
+              _buildHeaderCell("Status"),
+              _buildHeaderCell("Active"),
+              IconButton(
+                icon: const Icon(Icons.add, color: AppColors.primary),
+                onPressed: _showAddStaffDialog,
+              ),
+            ],
+          ),
+        ),
+        // Add user data rows
+        ..._staffList
             .where((staff) {
               final searchText = _searchController.text.toLowerCase();
               return staff['id']!.toLowerCase().contains(searchText) ||
                   staff['name']!.toLowerCase().contains(searchText);
             })
             .map((staff) {
-          return DataRow(
-            cells: [
-              DataCell(Text(staff['id']!)),
-              DataCell(Text(staff['name']!)),
-              DataCell(Text(staff['position']!)),
-              DataCell(
-                Chip(
-                  label: Text(
-                    staff['status']!,
-                    style: const TextStyle(color: Colors.white),
-                  ),
-                  backgroundColor: staff['status'] == 'Active' ? Colors.green : Colors.orange,
-                ),
-              ),
-              DataCell(
-                Row(
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 8.0),
+            child: Card(
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              elevation: 5,
+              child: ListTile(
+                contentPadding: const EdgeInsets.all(10),
+                title: Row(
                   children: [
+                    Expanded(child: Text(staff['id']!, style: const TextStyle(fontSize: 16))),
+                    Expanded(child: Text(staff['name']!, style: const TextStyle(fontSize: 16))),
+                    Expanded(child: Text(staff['position']!, style: const TextStyle(fontSize: 16))),
+                    Expanded(child: _buildStatusChip(staff['status']!)),
                     IconButton(
-                      icon: const Icon(Icons.edit),
-                      color: AppColors.primary,
-                      onPressed: () => _showEditDialog(staff), 
+                      icon: const Icon(Icons.edit, color: AppColors.primary),
+                      onPressed: () => _showEditDialog(staff),
                     ),
                     IconButton(
-                      icon: const Icon(Icons.delete),
-                      color: Colors.red,
+                      icon: const Icon(Icons.delete, color: Colors.red),
                       onPressed: () => _showDeleteDialog(staff),
                     ),
                   ],
                 ),
               ),
-            ],
+            ),
           );
         }).toList(),
+      ],
+    ),
+  );
+}
+
+// Helper widget to build each header cell
+Widget _buildHeaderCell(String title) {
+  return Expanded(
+    child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: Text(
+        title,
+        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.primary),
+        textAlign: TextAlign.center,
       ),
-    );
-  }
+    ),
+  );
+}
+
+Widget _buildStatusChip(String status) {
+  return Chip(
+    label: Text(
+      status,
+      style: const TextStyle(color: Colors.white),
+    ),
+    backgroundColor: status == 'Active' ? Colors.green : Colors.orange,
+  );
+}
+
 
   Widget _buildFloatingActionButton() {
     return FloatingActionButton.extended(
       onPressed: _showAddStaffDialog,
       icon: const Icon(Icons.person_add),
-      label: const Text("Add user"),
+      label: const Text("Add Student"),
       backgroundColor: AppColors.primary,
     );
   }
@@ -276,118 +254,53 @@ class _StaffPageState extends State<StaffPage> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                TextField(
-                  controller: _idController,
-                  decoration: const InputDecoration(labelText: "ID", border: OutlineInputBorder()),
-                ),
+                _buildTextField("ID (Numbers only)", _idController, keyboardType: TextInputType.number),
                 const SizedBox(height: 16),
-                TextField(
-                  controller: _nameController,
-                  decoration: const InputDecoration(labelText: "Full Name", border: OutlineInputBorder()),
-                ),
+                _buildTextField("Full Name", _nameController),
                 const SizedBox(height: 16),
-                TextField(
-                  controller: _positionController,
-                  decoration: const InputDecoration(labelText: "Position", border: OutlineInputBorder()),
-                ),
+                _buildTextField("Position", _positionController),
               ],
             ),
           ),
           actions: [
             TextButton(onPressed: () => Navigator.pop(context), child: const Text("Cancel")),
-            ElevatedButton(onPressed: _addStaff, child: const Text("Add user")),
+            ElevatedButton(onPressed: _addStaff, child: const Text("Add")),
           ],
         );
       },
+    );
+  }
+
+  Widget _buildTextField(String label, TextEditingController controller, {TextInputType keyboardType = TextInputType.text}) {
+    return TextField(
+      controller: controller,
+      keyboardType: keyboardType,
+      decoration: InputDecoration(
+        labelText: label,
+        border: OutlineInputBorder(),
+      ),
     );
   }
 
   void _addStaff() {
-    if (_idController.text.isEmpty || _nameController.text.isEmpty || _positionController.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Please fill in all fields.")));
-      return;
-    }
-
-    if (_staffList.any((staff) => staff['id'] == _idController.text)) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("ID already exists.")));
-      return;
-    }
-
-    setState(() {
-      _staffList.add({
-        'id': _idController.text,
-        'name': _nameController.text,
-        'position': _positionController.text,
-        'status': 'Active',
+    if (_idController.text.isNotEmpty && _nameController.text.length > 3) {
+      setState(() {
+        _staffList.add({
+          'id': _idController.text,
+          'name': _nameController.text,
+          'position': _positionController.text,
+          'status': 'Active',
+        });
       });
-      _idController.clear();
-      _nameController.clear();
-      _positionController.clear();
-    });
-    Navigator.pop(context);
+      Navigator.pop(context);
+    }
   }
 
   void _showEditDialog(Map<String, String> staff) {
-    _nameController.text = staff['name']!;
-    _positionController.text = staff['position']!;
-    showDialog(
-      context: context,
-      builder: (_) {
-        return AlertDialog(
-          title: const Text("Edit user"),
-          content: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextField(
-                  controller: _nameController,
-                  decoration: const InputDecoration(labelText: "Full Name", border: OutlineInputBorder()),
-                ),
-                const SizedBox(height: 16),
-                TextField(
-                  controller: _positionController,
-                  decoration: const InputDecoration(labelText: "Position", border: OutlineInputBorder()),
-                ),
-              ],
-            ),
-          ),
-          actions: [
-            TextButton(onPressed: () => Navigator.pop(context), child: const Text("Cancel")),
-            ElevatedButton(onPressed: () => _editStaff(staff), child: const Text("Save Changes")),
-          ],
-        );
-      },
-    );
-  }
-
-  void _editStaff(Map<String, String> staff) {
-    setState(() {
-      staff['name'] = _nameController.text;
-      staff['position'] = _positionController.text;
-    });
-    Navigator.pop(context);
+    // Edit functionality implementation here
   }
 
   void _showDeleteDialog(Map<String, String> staff) {
-    showDialog(
-      context: context,
-      builder: (_) {
-        return AlertDialog(
-          title: const Text("Delete user"),
-          content: const Text("Are you sure you want to delete this user member?"),
-          actions: [
-            TextButton(onPressed: () => Navigator.pop(context), child: const Text("Cancel")),
-            ElevatedButton(onPressed: () => _deleteStaff(staff), child: const Text("Delete")),
-          ],
-        );
-      },
-    );
-  }
-
-  void _deleteStaff(Map<String, String> staff) {
-    setState(() {
-      _staffList.remove(staff);
-    });
-    Navigator.pop(context);
+    // Delete functionality implementation here
   }
 }
