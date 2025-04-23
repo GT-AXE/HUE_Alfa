@@ -1,5 +1,3 @@
-// ignore_for_file: unused_import
-
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -96,6 +94,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
+
 class CustomBottomNavigationBar extends StatelessWidget {
   final HomeController controller = Get.find();
 
@@ -123,14 +122,14 @@ class CustomBottomNavigationBar extends StatelessWidget {
               fontSize: 12,
             ),
             items: [
-              _buildItem(CupertinoIcons.home, "الرئيسية", isSelected: controller.selectedIndex.value == 0),
-              _buildItem(CupertinoIcons.building_2_fill, "الكليات", isSelected: controller.selectedIndex.value == 1),
-              _buildItem(CupertinoIcons.person_2_fill, "الدكاترة", isSelected: controller.selectedIndex.value == 2),
-              _buildItem(CupertinoIcons.person_crop_rectangle, "الطلاب", isSelected: controller.selectedIndex.value == 3),
-              _buildItem(CupertinoIcons.settings, "الإعدادات", isSelected: controller.selectedIndex.value == 4),
+              _buildItem(CupertinoIcons.home, "home", isSelected: controller.selectedIndex.value == 0),
+              _buildItem(CupertinoIcons.building_2_fill, "college", isSelected: controller.selectedIndex.value == 1),
+              _buildItem(CupertinoIcons.person_2_fill, "doctors", isSelected: controller.selectedIndex.value == 2),
+              _buildItem(CupertinoIcons.person_crop_rectangle, "students", isSelected: controller.selectedIndex.value == 3),
+              _buildItem(CupertinoIcons.settings, "settings", isSelected: controller.selectedIndex.value == 4),
               _buildItem(CupertinoIcons.doc_plaintext, "المهام", isSelected: controller.selectedIndex.value == 5),
-              _buildItem(CupertinoIcons.chat_bubble_2, "المحادثات", isSelected: controller.selectedIndex.value == 6),
-              _buildItem(CupertinoIcons.briefcase_fill, "الموظفين", isSelected: controller.selectedIndex.value == 7),
+              _buildItem(CupertinoIcons.chat_bubble_2, "chat", isSelected: controller.selectedIndex.value == 6),
+              _buildItem(CupertinoIcons.briefcase_fill, "staff", isSelected: controller.selectedIndex.value == 7),
             ],
           ),
         ));
@@ -143,7 +142,6 @@ class CustomBottomNavigationBar extends StatelessWidget {
     );
   }
 }
-
 
 class HomePage extends StatelessWidget {
   final List<Map<String, dynamic>> ads = [
@@ -254,128 +252,52 @@ class HomePage extends StatelessWidget {
           childAspectRatio: 0.9,
         ),
         itemCount: ads.length,
-        itemBuilder: (context, index) => _buildAdItem(ads[index], index),
+        itemBuilder: (context, index) => _buildAdCard(ads[index]),
       ),
     );
   }
 
-  Widget _buildAdItem(Map<String, dynamic> ad, int index) {
-    return GetBuilder<HomeController>(
-      builder: (controller) => MouseRegion(
-        onEnter: (_) => controller.setHoverIndex(index),
-        onExit: (_) => controller.setHoverIndex(-1),
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
-          transform: Matrix4.identity()
-            ..translate(
-              0.0,
-              controller.hoverIndex == index ? -8.0 : 0.0,
-            ),
-          child: GestureDetector(
-            onTap: () => _onAdTap(ad),
-            child: Card(
-              elevation: controller.hoverIndex == index ? 12 : 6,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-              shadowColor: HomeColors.cardShadow.withOpacity(
-                controller.hoverIndex == index ? 0.4 : 0.2),
-              color: HomeColors.adCardColor,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Expanded(
-                    child: ClipRRect(
-                      borderRadius: const BorderRadius.vertical(
-                        top: Radius.circular(20)),
-                      child: Stack(
-                        children: [
-                          Image.asset(
-                            ad['images'],
-                            fit: BoxFit.cover,
-                            width: double.infinity,
-                          ),
-                          if (controller.hoverIndex == index)
-                            Container(
-                              decoration: BoxDecoration(
-                                color: Colors.black.withOpacity(0.3),
-                                borderRadius: const BorderRadius.vertical(
-                                  top: Radius.circular(20)),
-                              ),
-                            ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(12, 12, 12, 8),
-                    child: Text(
-                      ad['title'],
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                        color: HomeColors.adCardTextColor,
-                        height: 1.2,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
-                    child: Text(
-                      ad['description'],
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: HomeColors.adCardTextColor.withOpacity(0.9),
-                        height: 1.4,
-                      ),
-                    ),
-                  ),
-                  if (controller.hoverIndex == index)
-                    Container(
-                      height: 4,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            HomeColors.bottomNavBarSelected,
-                            Colors.transparent,
-                          ],
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
-                        ),
-                      ),
-                    ),
-                ],
+  Widget _buildAdCard(Map<String, dynamic> ad) {
+    return GestureDetector(
+      onTap: () {},
+      child: Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        elevation: 6,
+        shadowColor: Colors.black.withOpacity(0.15),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: ClipRRect(
+                borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+                child: Image.asset(ad['images'], fit: BoxFit.cover),
               ),
             ),
-          ),
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Text(
+                ad['title'],
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: HomeColors.primaryText,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              child: Text(
+                ad['description'],
+                style: TextStyle(
+                  fontSize: 14,
+                  color: HomeColors.secondaryText,
+                ),
+              ),
+            ),
+            const SizedBox(height: 8),
+          ],
         ),
       ),
     );
   }
-
-  void _onAdTap(Map<String, dynamic> ad) {
-    Get.snackbar(
-      ad['title'],
-      ad['description'],
-      backgroundColor: HomeColors.bottomNavBarBackground,
-      colorText: Colors.white,
-      snackPosition: SnackPosition.BOTTOM,
-      duration: const Duration(seconds: 2),
-      margin: const EdgeInsets.all(16),
-      borderRadius: 12,
-    );
-  }
-}
-
-class HomeColors {
-  static const Color scaffoldBackground = Color(0xFFF8F9FA);
-  static const Color appBarColor = Color(0xFF2C3E50);
-  static const Color bottomNavBarBackground = Color(0xFF34495E);
-  static const Color bottomNavBarSelected = Color(0xFFF1C40F);
-  static const Color bottomNavBarUnselected = Color(0xFFBDC3C7);
-  static const Color adCardColor = Color(0xFFFFFFFF);
-  static const Color adCardTextColor = Color(0xFF2C3E50);
-  static const Color primaryText = Color(0xFF2C3E50);
-  static const Color secondaryText = Color(0xFF7F8C8D);
-  static const Color cardShadow = Color(0xFF2C3E50);
 }

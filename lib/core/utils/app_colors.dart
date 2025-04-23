@@ -17,18 +17,22 @@ class AppColors {
   static const Color textSelf = Colors.white; // النص داخل فقاعة المستخدم
   static const Color textOther = Colors.black; // النص داخل فقاعة الطرف الآخر
 }
-
 class HomeColors {
   static const Color scaffoldBackground = Color(0xFFF8F9FA);
-  static const Color appBarColor = Color.fromARGB(255, 0, 103, 206);
-  static const Color bottomNavBarBackground = Color(0xFF34495E);
-  static const Color bottomNavBarSelected = Color(0xFFF1C40F);
-  static const Color bottomNavBarUnselected = Color(0xFFBDC3C7);
-  static const Color adCardColor = Color(0xFFFFFFFF);
-  static const Color adCardTextColor = Color(0xFF2C3E50);
-  static const Color primaryText = Color(0xFF2C3E50);
-  static const Color secondaryText = Color(0xFF7F8C8D);
-  static const Color cardShadow = Color(0xFF2C3E50);
+  static const Color appBarColor = HomeColors.primary;
+  static const Color bottomNavBarBackground = HomeColors.white;
+  static const Color bottomNavBarSelected = HomeColors.primary;
+  static const Color bottomNavBarUnselected = HomeColors.grey;
+  static const Color adCardColor = HomeColors.white;
+  static const Color adCardTextColor = HomeColors.primary;
+  static const Color primaryText = HomeColors.primary;
+  static const Color secondaryText = HomeColors.secondary;
+  static const Color cardShadow = HomeColors.shadowDark;
+  static const Color primary = Color(0xFF2C3E50);
+  static const Color secondary = Color(0xFF7F8C8D);
+  static const Color white = Colors.white;
+  static const Color shadowDark = Color(0xFF2C3E50);
+  static const Color grey = Color(0xFF95A5A6);
 }
 
 /// ألوان مخصصة لصفحة "Welcome"
@@ -248,4 +252,18 @@ class classColors {
   // مثال على تخصيص حسب الصفحة
   static const studentsCard = Color(0xFFE1F5FE);
   static const staffCard = Color(0xFFFFF3E0);
+}
+
+
+
+
+class adminColors {
+  static const Color primary = Color(0xFF0A73B7);
+  static const Color secondary = Color(0xFF4CAF50);
+  static const Color background = Color(0xFFF5F6FA);
+}
+
+class AppPadding {
+  static const double horizontal = 20.0;
+  static const double vertical = 16.0;
 }

@@ -46,13 +46,15 @@ class _AdminDashboardState extends State<AdminDashboard> {
       body: IndexedStack(
         index: _currentIndex,
         children: const [
-          HomeScreen(),
-          AnalyticsScreen(),
-          MessagesScreen(),
-          SettingsScreen(),
+          dashboard(),
+          student(),
+          recent(),
+          Settings(),
+          Analytics(),
+          Messages(),
         ],
       ),
-      bottomNavigationBar: _buildBottomNavBar(),
+      // bottomNavigationBar: _buildBottomNavBar(),
       floatingActionButton: _buildFloatingButton(),
       drawer: _buildSideDrawer(),
     );
@@ -65,7 +67,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
         style: GoogleFonts.poppins(
           fontSize: 20,
           fontWeight: FontWeight.w600,
-          color: Colors.black,
+          color: const Color.fromARGB(255, 0, 0, 0),
         ),
       ),
       actions: [
@@ -76,62 +78,55 @@ class _AdminDashboardState extends State<AdminDashboard> {
           ),
           onPressed: () {},
         ),
-        IconButton(
-          icon: const CircleAvatar(
-            radius: 16,
-            backgroundImage: NetworkImage(''),
-          ),
-          onPressed: () {},
-        ),
-        const SizedBox(width: 10),
       ],
     );
   }
+////hide bottom navigation bar
 
-  Widget _buildBottomNavBar() {
-    return Container(
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
-            blurRadius: 20,
-            offset: const Offset(0, -5),
-          ),
-        ],
-      ),
-      child: ClipRRect(
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
-        child: BottomNavigationBar(
-          currentIndex: _currentIndex,
-          onTap: (index) => setState(() => _currentIndex = index),
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: Colors.white,
-          selectedItemColor: const Color(0xFF3D5CFF),
-          unselectedItemColor: Colors.grey,
-          selectedLabelStyle: GoogleFonts.poppins(fontSize: 11),
-          unselectedLabelStyle: GoogleFonts.poppins(fontSize: 11),
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Iconsax.home),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Iconsax.chart_2),
-              label: 'Analytics',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Iconsax.message),
-              label: 'Messages',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Iconsax.setting_2),
-              label: 'Settings',
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+  // Widget _buildBottomNavBar() {
+  //   return Container(
+  //     decoration: BoxDecoration(
+  //       boxShadow: [
+  //         BoxShadow(
+  //           color: Colors.grey.withOpacity(0.2),
+  //           blurRadius: 20,
+  //           offset: const Offset(0, -5),
+  //         ),
+  //       ],
+  //     ),
+  //     child: ClipRRect(
+  //       borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+  //       child: BottomNavigationBar(
+  //         currentIndex: _currentIndex,
+  //         onTap: (index) => setState(() => _currentIndex = index),
+  //         type: BottomNavigationBarType.fixed,
+  //         backgroundColor: Colors.white,
+  //         selectedItemColor: const Color(0xFF3D5CFF),
+  //         unselectedItemColor: Colors.grey,
+  //         selectedLabelStyle: GoogleFonts.poppins(fontSize: 11),
+  //         unselectedLabelStyle: GoogleFonts.poppins(fontSize: 11),
+  //         items: const [
+  //           BottomNavigationBarItem(
+  //             icon: Icon(Iconsax.home),
+  //             label: 'Home',
+  //           ),
+  //           BottomNavigationBarItem(
+  //             icon: Icon(Iconsax.chart_2),
+  //             label: 'Analytics',
+  //           ),
+  //           BottomNavigationBarItem(
+  //             icon: Icon(Iconsax.message),
+  //             label: 'Messages',
+  //           ),
+  //           BottomNavigationBarItem(
+  //             icon: Icon(Iconsax.setting_2),
+  //             label: 'Settings',
+  //           ),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 
   Widget _buildFloatingButton() {
     return FloatingActionButton(
@@ -161,12 +156,12 @@ class _AdminDashboardState extends State<AdminDashboard> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const CircleAvatar(
-                  radius: 40,
-                  backgroundImage: NetworkImage(''),
+                  radius: 50,
+                  backgroundImage: AssetImage('assets/images/Cyber_Security.png'),
                 ),
-                const SizedBox(height: 15),
+                const SizedBox(height: 10),
                 Text(
-                  'Dr. Ahmed Mohamed',
+                  'Welcome DEV',
                   style: GoogleFonts.poppins(
                     color: Colors.white,
                     fontSize: 18,
@@ -175,39 +170,35 @@ class _AdminDashboardState extends State<AdminDashboard> {
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  'dev_axe@horus.edu.eg',
+                  'DEV@horus.edu.eg',
                   style: GoogleFonts.poppins(
-                    color: Colors.white.withOpacity(0.8),
+                    color: const Color.fromARGB(255, 255, 255, 255).withOpacity(0.8),
                     fontSize: 14,
                   ),
                 ),
                 const SizedBox(height: 15),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Text(
-                    'Super Admin',
-                    style: GoogleFonts.poppins(
-                      color: Colors.white,
-                      fontSize: 12,
-                    ),
-                  ),
-                ),
+                // Container(
+                //   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                //   decoration: BoxDecoration(
+                //     color: Colors.white.withOpacity(0.2),
+                //     borderRadius: BorderRadius.circular(20),
+                //   ),
+                //   child: Text(
+                //     'Super Admin',
+                //     style: GoogleFonts.poppins(
+                //       color: Colors.white,
+                //       fontSize: 12,
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ),
           _drawerItem(Iconsax.home, 'Dashboard', 0),
           _drawerItem(Iconsax.profile_2user, 'Students', null),
-          _drawerItem(Iconsax.teacher, 'Faculty', null),
-          _drawerItem(Iconsax.book, 'Courses', null),
           _drawerItem(Iconsax.calendar, 'Schedule', null),
-          _drawerItem(Iconsax.note, 'Exams', null),
-          const Divider(indent: 20, endIndent: 20),
+          const Divider(indent: 100, endIndent: 100, color: Color.fromARGB(255, 0, 140, 255)),
           _drawerItem(Iconsax.setting_2, 'Settings', 3),
-          _drawerItem(Iconsax.support, 'Help Center', null),
           _drawerItem(Iconsax.logout, 'Sign Out', null),
         ],
       ),
@@ -230,40 +221,44 @@ class _AdminDashboardState extends State<AdminDashboard> {
       },
     );
   }
-
-  void _showQuickActions(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
-      ),
-      builder: (context) {
-        return Container(
-          padding: const EdgeInsets.all(20),
-          height: 300,
-          child: Column(
-            children: [
-              Container(
-                width: 50,
-                height: 5,
-                decoration: BoxDecoration(
-                  color: Colors.grey[300],
-                  borderRadius: BorderRadius.circular(10),
-                ),
+ ///// Show Quick Actions
+void _showQuickActions(BuildContext context) {
+  showModalBottomSheet(
+    context: context,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
+    ),
+    builder: (context) {
+      return Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        height: 400,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+              width: 100,
+              height: 10,
+              decoration: BoxDecoration(
+                color: Colors.grey[300],
+                borderRadius: BorderRadius.circular(10),
               ),
-              const SizedBox(height: 15),
-              Text(
-                'Quick Actions',
-                style: GoogleFonts.poppins(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                ),
+            ),
+            const SizedBox(height: 15),
+            Text(
+              'Quick Actions',
+              style: GoogleFonts.poppins(
+                fontSize: 25,
+                fontWeight: FontWeight.w600,
               ),
-              const SizedBox(height: 20),
-              GridView.count(
+            ),
+            const SizedBox(height: 20),
+            Expanded(
+              child: GridView.count(
                 shrinkWrap: true,
-                crossAxisCount: 3,
+                crossAxisCount: 4,
                 childAspectRatio: 0.9,
+                crossAxisSpacing: 10, 
+                mainAxisSpacing: 10,  
                 children: [
                   _quickAction(Iconsax.profile_add, 'Add Student', Colors.blue),
                   _quickAction(Iconsax.teacher, 'Add Faculty', Colors.green),
@@ -271,14 +266,18 @@ class _AdminDashboardState extends State<AdminDashboard> {
                   _quickAction(Iconsax.calendar_add, 'Add Event', Colors.purple),
                   _quickAction(Iconsax.note_add, 'Create Exam', Colors.red),
                   _quickAction(Iconsax.document_upload, 'Upload', Colors.teal),
+
+
                 ],
               ),
-            ],
-          ),
-        );
-      },
-    );
-  }
+            ),
+          ],
+        ),
+      );
+    },
+  );
+}
+
 
   Widget _quickAction(IconData icon, String label, Color color) {
     return Column(
@@ -314,8 +313,8 @@ class _AdminDashboardState extends State<AdminDashboard> {
 }
 
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class dashboard extends StatelessWidget {
+  const dashboard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -324,100 +323,43 @@ class HomeScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            padding: const EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                colors: [Color(0xFF3D5CFF), Color(0xFF5B8DFF)],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: [
-                BoxShadow(
-                  color: const Color(0xFF3D5CFF).withOpacity(0.3),
-                  blurRadius: 15,
-                  offset: const Offset(0, 8),
-                ),
-              ],
-            ),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Welcome Back!',
-                        style: GoogleFonts.poppins(
-                          color: Colors.white.withOpacity(0.9),
-                          fontSize: 16,
-                        ),
-                      ),
-                      const SizedBox(height: 5),
-                      Text(
-                        'University Admin',
-                        style: GoogleFonts.poppins(
-                          color: Colors.white,
-                          fontSize: 22,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      Text(
-                        '5 new notifications\n3 pending tasks today',
-                        style: GoogleFonts.poppins(
-                          color: Colors.white.withOpacity(0.8),
-                          fontSize: 14,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const CircleAvatar(
-                  radius: 40,
-                  backgroundColor: Colors.white,
-                  backgroundImage: NetworkImage(''),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 25),
-          Text(
-            'Quick Access',
-            style: GoogleFonts.poppins(
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          const SizedBox(height: 15),
-          GridView.count(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            crossAxisCount: 4,
-            childAspectRatio: 0.9,
-            children: [
-              _quickAccessItem(Iconsax.profile_2user, 'Students', Colors.blue),
-              _quickAccessItem(Iconsax.teacher, 'Faculty', Colors.green),
-              _quickAccessItem(Iconsax.book, 'Courses', Colors.orange),
-              _quickAccessItem(Iconsax.calendar, 'Schedule', Colors.purple),
-              _quickAccessItem(Iconsax.note, 'Exams', Colors.red),
-              _quickAccessItem(Iconsax.document, 'Reports', Colors.teal),
-              _quickAccessItem(Iconsax.setting_2, 'Settings', Colors.indigo),
-              _quickAccessItem(Iconsax.more, 'More', Colors.grey),
-            ],
-          ),
+          
+          // const SizedBox(height: 25),
+          // Text(
+          //   'Quick Access',
+          //   style: GoogleFonts.poppins(
+          //     fontSize: 18,
+          //     fontWeight: FontWeight.w600,
+          //   ),
+          // ),
+          // const SizedBox(height: 15),
+          // GridView.count(
+          //   shrinkWrap: true,
+          //   physics: const NeverScrollableScrollPhysics(),
+          //   crossAxisCount: 4,
+          //   childAspectRatio: 0.9,
+          //   children: [
+          //     _quickAccessItem(Iconsax.profile_2user, 'Students', Colors.blue),
+          //     _quickAccessItem(Iconsax.teacher, 'Faculty', Colors.green),
+          //     _quickAccessItem(Iconsax.book, 'Courses', Colors.orange),
+          //     _quickAccessItem(Iconsax.calendar, 'Schedule', Colors.purple),
+          //     _quickAccessItem(Iconsax.note, 'Exams', Colors.red),
+          //     _quickAccessItem(Iconsax.document, 'Reports', Colors.teal),
+          //     _quickAccessItem(Iconsax.setting_2, 'Settings', Colors.indigo),
+          //     _quickAccessItem(Iconsax.more, 'More', Colors.grey),
+          //   ],
+          // ),
           const SizedBox(height: 25),
           Text(
             'Statistics',
             style: GoogleFonts.poppins(
-              fontSize: 18,
+              fontSize: 20,
               fontWeight: FontWeight.w600,
             ),
           ),
           const SizedBox(height: 15),
           SizedBox(
-            height: 120,
+            height: 130,
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: [
@@ -447,17 +389,21 @@ class HomeScreen extends StatelessWidget {
                 child: Text(
                   'View All',
                   style: GoogleFonts.poppins(
-                    color: const Color(0xFF3D5CFF),
+                    color: const Color.fromARGB(255, 17, 0, 255),
                   ),
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 15),
           _activityItem(Iconsax.profile_add, 'New student registered', '10 min ago', Colors.blue),
           _activityItem(Iconsax.edit, 'Course CS101 updated', '25 min ago', Colors.green),
           _activityItem(Iconsax.calendar, 'Exam schedule published', '1 hour ago', Colors.orange),
-        ],
+          _activityItem(Iconsax.message, 'New message from faculty', '2 hours ago', Colors.purple),
+          _activityItem(Iconsax.notification, 'New notification', '3 hours ago', Colors.red),
+          _activityItem(Iconsax.document, 'New report generated', '5 hours ago', Colors.teal),
+          _activityItem(Iconsax.support, 'Support ticket resolved', '1 day ago', Colors.indigo),
+          _activityItem(Iconsax.setting_2, 'Settings updated', '2 days ago', Colors.grey),],
       ),
     );
   }
@@ -489,11 +435,11 @@ class HomeScreen extends StatelessWidget {
       width: 160,
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color.fromARGB(255, 200, 200, 200),
         borderRadius: BorderRadius.circular(15),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
+            color: const Color.fromARGB(255, 0, 0, 0).withOpacity(0.1),
             blurRadius: 10,
             offset: const Offset(0, 5),
           ),
@@ -505,9 +451,8 @@ class HomeScreen extends StatelessWidget {
           Row(
             children: [
               Container(
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsets.all(5),
                 decoration: BoxDecoration(
-                  color: color.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Icon(icon, color: color, size: 20),
@@ -534,7 +479,7 @@ class HomeScreen extends StatelessWidget {
           Text(
             label,
             style: GoogleFonts.poppins(
-              color: Colors.grey,
+              color: const Color.fromARGB(255, 0, 0, 0),
               fontSize: 13,
             ),
           ),
@@ -548,7 +493,7 @@ class HomeScreen extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color.fromARGB(255, 240, 240, 245),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
@@ -576,7 +521,7 @@ class HomeScreen extends StatelessWidget {
                 Text(
                   time,
                   style: GoogleFonts.poppins(
-                    color: Colors.grey,
+                    color: const Color.fromARGB(255, 0, 0, 0),
                     fontSize: 12,
                   ),
                 ),
@@ -590,8 +535,8 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class AnalyticsScreen extends StatelessWidget {
-  const AnalyticsScreen({super.key});
+class Analytics extends StatelessWidget {
+  const Analytics({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -604,8 +549,8 @@ class AnalyticsScreen extends StatelessWidget {
   }
 }
 
-class MessagesScreen extends StatelessWidget {
-  const MessagesScreen({super.key});
+class Messages extends StatelessWidget {
+  const Messages({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -618,14 +563,40 @@ class MessagesScreen extends StatelessWidget {
   }
 }
 
-class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({super.key});
+class Settings extends StatelessWidget {
+  const Settings({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Text(
         'Settings',
+        style: GoogleFonts.poppins(fontSize: 24),
+      ),
+    );
+  }
+}
+class student extends StatelessWidget {
+  const student({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text(
+        'Student',
+        style: GoogleFonts.poppins(fontSize: 24),
+      ),
+    );
+  }
+}
+class recent extends StatelessWidget {
+  const recent({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text(
+        'Recent',
         style: GoogleFonts.poppins(fontSize: 24),
       ),
     );

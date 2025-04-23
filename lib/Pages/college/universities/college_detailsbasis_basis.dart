@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:hue/core/utils/app_colors.dart';
-import '../departments/AI-CS.dart';
+import '../departments/ai_cs.dart';
 import '../departments/Fine Arts.dart';
 import '../departments/Physical Therapy.dart';
 import '../departments/Human Medicine.dart';

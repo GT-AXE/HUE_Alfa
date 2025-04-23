@@ -1,10 +1,9 @@
-// ignore_for_file: library_private_types_in_public_api, prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'reset_password.dart';
 import '../home/home.dart';
 import 'signup.dart';
+import 'package:hue/core/services/Users.dart';  // استيراد صفحة إدارة المستخدمين
 import 'package:hue/core/utils/app_colors.dart';
 
 class Login extends StatefulWidget {
@@ -72,7 +71,7 @@ class _LoginState extends State<Login> {
       if (response.user != null && mounted) {
         Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (_) => Home()),
+          MaterialPageRoute(builder: (_) => const UsersPage()), // تحويل إلى صفحة إدارة المستخدمين
           (route) => false,
         );
       } else {

@@ -248,7 +248,7 @@ class _WelcomePageState extends State<WelcomePage> with SingleTickerProviderStat
                             color: WelcomeColors.yellow,
                             icon: Icons.login_rounded,
                             isSecondary: true,
-                            onPressed: () => _navigateTo(context, const Login()),
+                            onPressed: () => _navigateTo(context,  Login()),
                           ),
                           const SizedBox(height: 25),
                         ],
