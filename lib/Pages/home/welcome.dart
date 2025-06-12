@@ -240,7 +240,7 @@ class _WelcomePageState extends State<WelcomePage> with SingleTickerProviderStat
                             text: 'Explore Home',
                             color: WelcomeColors.darkBlue,
                             icon: Icons.rocket_launch_rounded,
-                            onPressed: () => _navigateTo(context, Home(), replace: true),
+                            onPressed: () => _navigateTo(context, HomePage(), replace: true),
                           ),
                           const SizedBox(height: 15),
                           _buildAnimatedButton(

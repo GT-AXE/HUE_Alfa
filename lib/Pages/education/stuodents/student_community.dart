@@ -296,24 +296,35 @@ class _ForumsPageState extends State<ForumsPage> {
       bottomNavigationBar: BottomAppBar(
         height: 60,
         color: isDark ? Colors.grey.shade900 : Colors.white,
+        elevation: 8,
+        shape: const CircularNotchedRectangle(),
+        notchMargin: 8,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            IconButton(
-              icon: Icon(Icons.home, color: isDark ? Colors.amber.shade300 : Colors.indigo.shade600),
-              onPressed: () {},
+            _buildNavItem(
+              icon: Icons.home,
+              label: 'Home',
+              isSelected: true,
+              onTap: () {},
             ),
-            IconButton(
-              icon: Icon(Icons.forum, color: isDark ? Colors.white : Colors.indigo.shade800),
-              onPressed: () {},
+            _buildNavItem(
+              icon: Icons.forum,
+              label: 'Forum',
+              isSelected: false,
+              onTap: () {},
             ),
-            IconButton(
-              icon: Icon(Icons.person, color: isDark ? Colors.white : Colors.grey.shade600),
-              onPressed: () {},
+            _buildNavItem(
+              icon: Icons.person,
+              label: 'Profile',
+              isSelected: false,
+              onTap: () {},
             ),
-            IconButton(
-              icon: Icon(Icons.settings, color: isDark ? Colors.white : Colors.grey.shade600),
-              onPressed: () {
+            _buildNavItem(
+              icon: Icons.settings,
+              label: 'Settings',
+              isSelected: false,
+              onTap: () {
                 setState(() => _isDarkMode = !_isDarkMode);
                 Get.changeThemeMode(
                   _isDarkMode ? ThemeMode.dark : ThemeMode.light);
@@ -694,25 +705,88 @@ class _ForumsPageState extends State<ForumsPage> {
   void _showForumSnackbar(Map<String, dynamic> forum) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     
-    Get.snackbar(
-      '🚀 Coming Soon!',
-      '${forum['title']} forum is launching soon!',
-      snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: isDark ? Colors.grey.shade800 : Colors.white,
-      colorText: isDark ? Colors.white : Colors.indigo.shade800,
-      duration: const Duration(seconds: 2),
-      margin: const EdgeInsets.all(16),
-      borderRadius: 16,
-      boxShadows: [
-        BoxShadow(
-          color: Colors.black.withOpacity(0.1),
-          blurRadius: 10,
-          spreadRadius: 2,
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Row(
+          children: [
+            Icon(
+              Icons.rocket_launch_outlined,
+              color: Colors.amber.shade300,
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    '🚀 Coming Soon!',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: isDark ? Colors.white : Colors.indigo.shade800,
+                    ),
+                  ),
+                  Text(
+                    '${forum['title']} forum is launching soon!',
+                    style: TextStyle(
+                      color: isDark ? Colors.white70 : Colors.indigo.shade600,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
-      ],
-      icon: Icon(Icons.rocket_launch_outlined, 
-          color: Colors.amber.shade300),
-      snackStyle: SnackStyle.FLOATING,
+        backgroundColor: isDark ? Colors.grey.shade800 : Colors.white,
+        duration: const Duration(seconds: 3),
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+        margin: const EdgeInsets.all(16),
+        elevation: 6,
+        action: SnackBarAction(
+          label: 'OK',
+          textColor: Colors.amber.shade300,
+          onPressed: () {
+            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget _buildNavItem({
+    required IconData icon,
+    required String label,
+    required bool isSelected,
+    required VoidCallback onTap,
+  }) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    
+    return InkWell(
+      onTap: onTap,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            icon,
+            color: isSelected
+                ? isDark ? Colors.amber.shade300 : Colors.indigo.shade600
+                : isDark ? Colors.white60 : Colors.grey.shade600,
+          ),
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: 12,
+              color: isSelected
+                  ? isDark ? Colors.amber.shade300 : Colors.indigo.shade600
+                  : isDark ? Colors.white60 : Colors.grey.shade600,
+              fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

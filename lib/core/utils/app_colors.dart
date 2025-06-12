@@ -3,12 +3,43 @@ import 'package:flutter/material.dart';
 /// الألوان العامة للتطبيق
  
  class mainColors {
-  static const Color primaryColor = Colors.lightBlue;
-  static const Color scaffoldBackgroundColor = Colors.white;
-  static const Color appBarBackgroundColor = Colors.lightBlue;
-  static const Color appBarForegroundColor = Colors.white;
-  static const Color bodyTextColor = Colors.black;
+  // Light Theme Colors
+  static const Color scaffoldBackgroundColor = Color(0xFFF5F5F5);
+  static const Color appBarBackgroundColor = Colors.white;
+  static const Color appBarForegroundColor = Colors.black;
+  static const Color bodyTextColor = Colors.black87;
   static const Color bodyTextColorMedium = Colors.black54;
+  static const Color primaryColor = Color(0xFF3F51B5);
+  static const Color accentColor = Color(0xFFFFC107);
+  static const Color errorColor = Color(0xFFE53935);
+  static const Color successColor = Color(0xFF43A047);
+  static const Color navBarBackground = Colors.white;
+  static const Color navBarSelectedItem = Color(0xFFFFC107);
+  static const Color navBarUnselectedItem = Color(0xFF3F51B5);
+  static const Color cardBackground = Colors.white;
+  static const Color shadowColor = Color(0x1A000000);
+  static const Color titleTextColor = Colors.black87;
+  static const Color subtitleTextColor = Colors.black54;
+  static const Color linkColor = Color(0xFF3F51B5);
+  
+  // Dark Theme Colors
+  static const Color scaffoldBackgroundColorDark = Color(0xFF121212);
+  static const Color appBarBackgroundColorDark = Color(0xFF1E1E1E);
+  static const Color appBarForegroundColorDark = Colors.white;
+  static const Color bodyTextColorDark = Colors.white;
+  static const Color bodyTextColorMediumDark = Colors.white70;
+  static const Color primaryColorDark = Color(0xFF5C6BC0);
+  static const Color accentColorDark = Color(0xFFFFD54F);
+  static const Color errorColorDark = Color(0xFFEF5350);
+  static const Color successColorDark = Color(0xFF66BB6A);
+  static const Color navBarBackgroundDark = Color(0xFF1E1E1E);
+  static const Color navBarSelectedItemDark = Color(0xFFFFD54F);
+  static const Color navBarUnselectedItemDark = Color(0xFF5C6BC0);
+  static const Color cardBackgroundDark = Color(0xFF2D2D2D);
+  static const Color shadowColorDark = Color(0x1AFFFFFF);
+  static const Color titleTextColorDark = Colors.white;
+  static const Color subtitleTextColorDark = Colors.white70;
+  static const Color linkColorDark = Color(0xFF5C6BC0);
 }
 class AppColors {
   static const Color primary = Colors.lightBlue; // اللون الأساسي

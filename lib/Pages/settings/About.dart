@@ -11,11 +11,11 @@ class AboutPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = ThemeData(
       textTheme: GoogleFonts.poppinsTextTheme(),
-      cardTheme: CardTheme(
-        elevation: 8,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        margin: const EdgeInsets.only(bottom: 20),
-      ),
+      // cardTheme: CardTheme(
+      //   elevation: 8,
+      //   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      //   margin: const EdgeInsets.only(bottom: 20),
+      // ),
     );
 
     return Theme(

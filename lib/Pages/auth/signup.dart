@@ -122,7 +122,7 @@ class _SignUpPageState extends State<SignUpPage> {
         if (mounted) {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => Home()), // الصفحة الرئيسية
+            MaterialPageRoute(builder: (context) => const HomePage()), // الصفحة الرئيسية
           );
         }
       } else {

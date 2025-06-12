@@ -45,5 +45,11 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>FLTEnableImpeller</key>
+	<true />
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<true />
+	<key>DART_OBFUSCATION</key>
+	<true />
 </dict>
 </plist>

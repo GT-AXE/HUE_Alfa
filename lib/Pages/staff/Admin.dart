@@ -70,6 +70,13 @@ class _AdminDashboardState extends State<AdminDashboard> {
           color: const Color.fromARGB(255, 0, 0, 0),
         ),
       ),
+      elevation: 2,
+      backgroundColor: Colors.white,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          bottom: Radius.circular(15),
+        ),
+      ),
       actions: [
         IconButton(
           icon: Badge(
@@ -78,7 +85,14 @@ class _AdminDashboardState extends State<AdminDashboard> {
           ),
           onPressed: () {},
         ),
+        const SizedBox(width: 8),
       ],
+      leading: IconButton(
+        icon: const Icon(Icons.menu, color: Colors.black87),
+        onPressed: () {
+          // Add drawer functionality here if needed
+        },
+      ),
     );
   }
 ////hide bottom navigation bar
