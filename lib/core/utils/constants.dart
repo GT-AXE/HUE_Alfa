@@ -3,8 +3,8 @@ class Constants {
   Constants._();
   
   // Supabase Configuration
-  static const String supabaseUrl = 'https://your-project.supabase.co';
-  static const String supabaseAnonKey = 'your-anon-key';
+  static const String supabaseUrl = 'https://judwcjkwjwsamlenstfs.supabase.co';
+  static const String supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp1ZHdjamt3andzYW1sZW5zdGZzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDAyMTY3NTMsImV4cCI6MjA1NTc5Mjc1M30.8j4oUsmaq7IQT76UigkOpha39O3CRK-yuBvZIVe3bC8';
   
   // Storage Keys
   static const String userSessionKey = 'user_session';

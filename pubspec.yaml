@@ -1,56 +1,58 @@
 name: hue
-description: "A new Flutter project."
+description: "HUE Educational Platform - A comprehensive Flutter application for educational management."
 publish_to: 'none'
 
-version: 1.0.0+1
+version: 1.0.1+2
 
 environment:
-  sdk: ">=3.5.4 <4.0.0"
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  
+
   # State Management
   get: ^4.6.6
-  
+
   # Database & Storage
-  hive_flutter: ^1.1.0
   shared_preferences: ^2.2.2
   supabase_flutter: ^2.5.6
-  
+
   # UI Components
-  iconsax: ^0.0.8 
+  iconsax: ^0.0.8
   cupertino_icons: ^1.0.8
   flutter_rating_bar: ^4.0.1
   shimmer: ^3.0.0
   google_fonts: ^6.1.0
   cached_network_image: ^3.3.1
-  
+
   # Media & Files
   video_player: ^2.8.6
   image_picker: ^1.0.7
-  
+
   # Utilities
   uuid: ^4.4.0
   url_launcher: ^6.2.6
   package_info_plus: ^8.0.0
   crypto: ^3.0.3
-  
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^4.0.0
+  flutter_lints: ^3.0.0
 
 flutter:
   uses-material-design: true
+
   assets:
     - assets/Video/
     - assets/images/
-  
-  fonts:
-    - family: Cairo
-      fonts:
-        - asset: fonts/Cairo-Regular.ttf
-        - asset: fonts/Cairo-Bold.ttf
-          weight: 700
+    - assets/fonts/
+
+  # fonts:
+  #   - family: Cairo
+  #     fonts:
+  #       - asset: assets/fonts/Cairo-Regular.ttf
+  #       - asset: assets/fonts/Cairo-Bold.ttf
+  #         weight: 700

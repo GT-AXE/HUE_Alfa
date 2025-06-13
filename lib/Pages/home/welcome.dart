@@ -5,13 +5,14 @@ import 'package:hue/core/utils/assets.dart';
 import 'package:hue/Pages/auth/login.dart';
 import 'package:hue/Pages/home/home.dart';
 import 'package:hue/core/utils/app_colors.dart';
+
 import 'dart:math' as math;
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
 
   @override
-  _WelcomePageState createState() => _WelcomePageState();
+  State<WelcomePage> createState() => _WelcomePageState();
 }
 
 class _WelcomePageState extends State<WelcomePage> with SingleTickerProviderStateMixin {
@@ -175,7 +176,7 @@ class _WelcomePageState extends State<WelcomePage> with SingleTickerProviderStat
                       ),
                       child: Container(
                         padding: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                         ),
                         child: Image.asset(
@@ -240,7 +241,7 @@ class _WelcomePageState extends State<WelcomePage> with SingleTickerProviderStat
                             text: 'Explore Home',
                             color: WelcomeColors.darkBlue,
                             icon: Icons.rocket_launch_rounded,
-                            onPressed: () => _navigateTo(context, HomePage(), replace: true),
+                            onPressed: () => _navigateTo(context, const HomePage(), replace: true),
                           ),
                           const SizedBox(height: 15),
                           _buildAnimatedButton(
@@ -248,7 +249,7 @@ class _WelcomePageState extends State<WelcomePage> with SingleTickerProviderStat
                             color: WelcomeColors.yellow,
                             icon: Icons.login_rounded,
                             isSecondary: true,
-                            onPressed: () => _navigateTo(context,  Login()),
+                            onPressed: () => _navigateTo(context, const Login()),
                           ),
                           const SizedBox(height: 25),
                         ],

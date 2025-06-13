@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:hue/core/utils/assets.dart';
 import 'package:hue/core/models/role.dart';
-import 'package:hue/core/controllers/role_manager.dart';
-import 'package:hue/Pages/staff/staff.dart';
+import 'package:hue/core/widgets/app_background.dart';
 import '../auth/login.dart';
 import '../college/universities/universities_page.dart';
+import '../settings/settings.dart';
+import '../chat/chat.dart';
 import '../education/doctors/doctors.dart';
 import '../education/stuodents/students.dart';
-import '../settings/settings.dart';
 import '../academics/submissions.dart';
-import '../chat/chat.dart';
+import '../staff/staff.dart';
 import 'package:hue/core/utils/app_colors.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppBar({Key? key}) : super(key: key);
+  const CustomAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +38,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           padding: const EdgeInsets.only(right: 16.0),
           child: IconButton(
             icon: Icon(Icons.login, color: Colors.yellow[700], size: 28),
-            onPressed: () => Get.offAll(Login()),
+            onPressed: () => Get.offAll(const Login()),
             tooltip: 'تسجيل الدخول',
           ),
         ),
@@ -52,7 +51,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 }
 
 class CustomBottomNavigationBar extends StatelessWidget {
-  CustomBottomNavigationBar({Key? key, required this.currentIndex, required this.onTap}) : super(key: key);
+  const CustomBottomNavigationBar({super.key, required this.currentIndex, required this.onTap});
   
   final int currentIndex;
   final Function(int) onTap;
@@ -64,7 +63,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
         color: Colors.white,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 10,
             offset: const Offset(0, -2),
           ),
@@ -80,7 +79,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
           backgroundColor: Colors.white,
           elevation: 0,
           selectedItemColor: Colors.amberAccent,
-          unselectedItemColor: Colors.blueAccent.withOpacity(0.7),
+          unselectedItemColor: Colors.blueAccent.withValues(alpha: 0.7),
           showSelectedLabels: true,
           showUnselectedLabels: true,
           selectedLabelStyle: const TextStyle(
@@ -103,6 +102,26 @@ class CustomBottomNavigationBar extends StatelessWidget {
               label: 'الجامعات',
             ),
             BottomNavigationBarItem(
+              icon: Icon(Icons.person_outlined),
+              activeIcon: Icon(Icons.person),
+              label: 'الأطباء',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.groups_outlined),
+              activeIcon: Icon(Icons.groups),
+              label: 'الطلاب',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.assignment_outlined),
+              activeIcon: Icon(Icons.assignment),
+              label: 'المهام',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.work_outlined),
+              activeIcon: Icon(Icons.work),
+              label: 'الموظفين',
+            ),
+            BottomNavigationBarItem(
               icon: Icon(Icons.chat_outlined),
               activeIcon: Icon(Icons.chat),
               label: 'المحادثات',
@@ -120,7 +139,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
 }
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -132,8 +151,12 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> _pages = [
     const HomeContent(),
     const UniversitiesPage(),
+    DoctorsPage(),
+    StudentsPage(),
+    SubmissionsPage(),
+    const StaffPage(userRole: Role.admin),
     const ChatPage(),
-    SettingsPage(), // Remove const here
+    SettingsPage(),
   ];
   
   void _changePage(int index) {
@@ -146,7 +169,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(),
-      body: _pages[_selectedIndex],
+      body: AppBackground(
+        child: _pages[_selectedIndex],
+      ),
       bottomNavigationBar: CustomBottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: _changePage,
@@ -156,7 +181,7 @@ class _HomePageState extends State<HomePage> {
 }
 
 class HomeContent extends StatelessWidget {
-  const HomeContent({Key? key}) : super(key: key);
+  const HomeContent({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -164,17 +189,44 @@ class HomeContent extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset(
-            Assets.imagesLogoBlue,
-            width: 200,
-            height: 200,
-          ),
-          const SizedBox(height: 20),
-          const Text(
-            'مرحباً بك في تطبيق Hue',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
+          Container(
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: Colors.white.withValues(alpha: 0.9),
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.1),
+                  blurRadius: 20,
+                  offset: const Offset(0, 10),
+                ),
+              ],
+            ),
+            child: Column(
+              children: [
+                Image.asset(
+                  Assets.imagesLogoBlue,
+                  width: 150,
+                  height: 150,
+                ),
+                const SizedBox(height: 20),
+                Text(
+                  'مرحباً بك في تطبيق Hue',
+                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).primaryColor,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  'منصة تعليمية شاملة لجامعة حورس',
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    color: Colors.grey[600],
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
             ),
           ),
         ],
