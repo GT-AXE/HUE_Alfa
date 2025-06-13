@@ -7,6 +7,7 @@ import 'package:hue/core/utils/app_theme.dart';
 import 'package:hue/core/utils/constants.dart';
 import 'package:hue/core/services/error_handler.dart';
 import 'package:hue/core/controllers/app_controller.dart';
+import 'package:hue/core/widgets/app_background.dart';
 
 void main() async {
   // ضمان تهيئة Flutter
